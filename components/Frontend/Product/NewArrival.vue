@@ -1,42 +1,23 @@
 <template>
-<section class="tp-product-arrival-area pb-56">
+<section class="tp-product-arrival-area ">
     <div class="container">
-      <div class="row align-items-end">
-        <div class="col-xl-5 col-sm-6">
-          <div class="tp-section-title-wrapper mb-40">
-            <h3 class="tp-section-title">
+      <div class="flex flex-row items-end">
+        <div class="xl:col-span-5 sm:col-span-6">
+          <div class="text-sm ">
+            <h3 class="relative text-4xl z-[1] text-black">
               New Arrivals
-              <FrontendProductSvgSectionLine />
+              <FrontendProductSvgSectionLine  />
             </h3>
           </div>
         </div>
-        <!-- <div class="col-xl-7 col-sm-6">
-          <div
-            class="tp-product-arrival-more-wrapper d-flex justify-content-end"
-          >
-            <div
-              class="tp-product-arrival-arrow tp-swiper-arrow mb-40 text-end tp-product-arrival-border"
-            >
-              <button type="button" class="tp-arrival-slider-button-prev me-2">
-                <SvgPrevArrow />
-              </button>
-              <button type="button" class="tp-arrival-slider-button-next">
-                <SvgNextArrow />
-              </button>
-            </div>
-          </div>
-        </div> -->
       </div>
       <div class="row">
         <div class="col-xl-12">
           <div class="tp-product-arrival-slider fix">
             <Swiper
               :slidesPerView="4"
-              :spaceBetween="30"
-              :pagination="{
-                el: '.tp-arrival-slider-dot',
-                clickable: true,
-              }"
+              :spaceBetween="20"
+              :pagination="true"
               :navigation="{
                 nextEl: '.tp-arrival-slider-button-next',
                 prevEl: '.tp-arrival-slider-button-prev',
@@ -62,11 +43,12 @@
               class="tp-product-arrival-active swiper-container"
             >
               <SwiperSlide v-for="(item, i) in new_arrival" :key="i">
-                <div>
+                <!-- <div>
                     <img :src="item.image" alt="">
                     <span>{{ item.name }}</span>
                     
-                </div>
+                </div> -->
+                <FrontendProductTheme1Card :item="item" />
               </SwiperSlide>
             </Swiper>
           </div>
@@ -85,7 +67,7 @@ import { Pagination, Navigation } from "swiper/modules";
 const props = defineProps({
     new_arrival: Array
 })
-console.log(props.new_arrival)
+// console.log(props.new_arrival)
 </script>
 
 <style scoped>

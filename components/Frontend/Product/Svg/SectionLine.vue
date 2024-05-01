@@ -1,4 +1,5 @@
 <template>
+  <div class="absolute z-[-1] top-7">
     <svg
       width="114"
       height="35"
@@ -8,12 +9,13 @@
     >
       <path
         d="M112 23.275C1.84952 -10.6834 -7.36586 1.48086 7.50443 32.9053"
-        stroke="currentColor"
+        stroke="red"
         stroke-width="4"
         stroke-miterlimit="3.8637"
         stroke-linecap="round"
       />
     </svg>
+  </div>
   </template>
   
   <script setup>
