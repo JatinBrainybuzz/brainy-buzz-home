@@ -31,9 +31,6 @@
     .transition-2{
       @apply transition-all duration-500 ease-out;
     }
-    /* .product-item {
-      @apply bg-white border rounded-lg border-primary-500  hover:shadow-md hover:border hover:border-white;
-    } */
     .product-offer-item {
       @apply shadow-sm hover:shadow-lg lg:px-40 px-0 py-20;
     }
@@ -43,12 +40,6 @@
     .product-offer-item .product-action {
       bottom: 70px;
     }
-    /* .product-item:hover img {
-      @apply transform scale-110 transition-1;
-    } */
-    /* .product-item-thumb {
-      @apply max-w-full border-t border-b border-primary rounded-t-lg md:w-auto;
-    } */
     .product-badge {
       @apply absolute top-4 right-5 z-[1];
     }
@@ -61,8 +52,31 @@
     .product-action-btn {
       @apply relative inline-block w-10 h-10 text-center leading-10 text-2xl text-black bg-white border border-primary hover:text-white hover:bg-primary hover:border-primary;
     }
-    
+    .submenu {
+      @apply min-w-[200px] bg-white z-50  shadow-lg p-12 px-6 pb-20 transform origin-top transition duration-100;
+    }
+    .category-menu-btn{
+      @apply font-medium text-base text-white bg-primary w-full px-12 py-7 text-left relative;
+    }
+
+    .has-dropdown{
+      @apply hover:text-primary mx-auto my-4;
+    }
 
   }
+
+  @layer utilities {
+   /* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+}
 
   

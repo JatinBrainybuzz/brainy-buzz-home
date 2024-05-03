@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <header class="shadow-md border-b-1 relative px-6">
+    <div class="shadow-md border-b-1">
+        <header class=" relative px-6">
             <nav class="container mx-auto p-4 justify-between flex sticky">
                 <NuxtLink class="" to="/">
                     <img src="/public/brainybuzzlong.png" class="w-auto h-20 hidden md:block" alt="Image Link here">
@@ -25,15 +25,16 @@
                 </div>
                 </div>
         </nav>
-
-        <!-- Bottom Header -->
-       
-
         </header>
+        <!-- Bottom Header -->
+        <FrontendHeaderBottom  :category="items"/>
+
+    
     </div>
 </template>
 
 <script setup>
-// import useIsActiveLink from '~/composables/useIsActiveLink';
-
+const HOMEPAGE_API = "http://localhost:8000/api/home/get-all-homepage-data?order_id=13&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&guestToken=zqhlljhc2vcvt182507tnksealg0jr9ab8hnreov&routePath=/product/filter&url&activity=visited_website";
+const {  data: HomeAPI } = await useLazyFetch(HOMEPAGE_API);
+const items = HomeAPI.value.data.parent_category;
 </script>

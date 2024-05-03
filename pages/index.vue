@@ -3,7 +3,8 @@
         <UCarousel v-slot="{ item }" :items="arr" :ui="{ item: 'basis-full md:basis-1/2 lg:basis-1/2' }" class="rounded-lg overflow-hidden" arrows indicators>
             <img :src="item.media" class="object-fit w-full h-3/4" draggable="false">
         </UCarousel>
-        <br>
+        
+        <FrontendTheme1FeatureArea />
         <FrontendProductNewArrival :new_arrival="new_arrival"/>
         <!-- <HomepageCategoryCard :parent_category = "parent_categories"/> -->
     </div>
@@ -15,6 +16,7 @@ const {  data: items } = await useLazyFetch(HOMEPAGE_API);
 const parent_categories = items.value.data.parent_category;
 const arr = items.value.data.banner.below_category.data;
 const new_arrival = items.value.data.product.new_arrival;
+
 // console.log(arr)
 </script>
 

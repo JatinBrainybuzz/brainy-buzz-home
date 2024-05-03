@@ -11,9 +11,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xl-12">
-          <div class="tp-product-arrival-slider fix">
+      <div>
             <Swiper
               :slidesPerView="4"
               :spaceBetween="20"
@@ -43,16 +41,9 @@
               class="tp-product-arrival-active swiper-container"
             >
               <SwiperSlide v-for="(item, i) in new_arrival" :key="i">
-                <!-- <div>
-                    <img :src="item.image" alt="">
-                    <span>{{ item.name }}</span>
-                    
-                </div> -->
-                <FrontendProductTheme1Card :item="item" />
+                <FrontendTheme1Card :item="item" />
               </SwiperSlide>
             </Swiper>
-          </div>
-        </div>
       </div>
     </div>
 </section>
