@@ -1,7 +1,7 @@
 <template>
     <div :class="` my-16 mx-5 group bg-white border rounded-lg border-gray-300 hover:shadow-lg hover:border-white hover:border transition-1`">
       <div class="max-w-full border-gray-400 border-b rounded-t-lg md:w-auto relative overflow-hidden ">
-        <nuxt-link :href="`/product-details/${item.id}`">
+        <nuxt-link :href="`/product-details/${item.name}`">
           <img :src="item.image" alt="Product" class="group-hover:transform group-hover:scale-110 group-hover:transition-1" />
         </nuxt-link>
   
@@ -70,11 +70,11 @@
       <div class=" md:px-8 px-8 py-20 md:py-8">
         <!-- tp-product-category -->
         <div class=" leading-none mb-3 text-left text-opacity-70 text-sm font-medium hover:text-primary">
-          <nuxt-link :href="`/product-details/${item.id}`">{{ item.category }}</nuxt-link>
+          <nuxt-link :href="`/product-category/${item.category}`">{{ item.category }}</nuxt-link>
         </div>
         <div class="h-20">
           <h3 class="hover:text-primary mb-5 font-medium text-base leading-tight text-left text-clip">
-            <nuxt-link :href="`/product-details/${item.id}`">
+            <nuxt-link :href="`/product-details/${item.slug}`">
               {{ item.name }}
             </nuxt-link>
           </h3>
@@ -98,10 +98,10 @@
               Rs {{parseFloat(item.special_price).toFixed(2)}}
             </span>
           </div>
-          <span v-else class="text-black md:text-35">Rs {{ item.price.toFixed(2) }}</span>
+          <span v-else class="text-black md:text-35">Rs {{ item.price }}</span>
         </div>
   
-        <div class="tp-product-countdown" v-if="offer_style">
+        <!-- <div class="tp-product-countdown" v-if="offer_style">
           <div class="tp-product-countdown-inner">
             <ul>
               <li>
@@ -118,7 +118,7 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </template>
@@ -131,16 +131,16 @@
   }
   const props = defineProps({
   item: Object,
-  offer_style: {
-    type: Boolean,
-    default: undefined // To make it optional
-  }
+  // // offer_style: {
+  // //   type: Boolean,
+  //   // default: undefined // To make it optional
+  // }
 });
-  let timer;
-  if (props.item.offerDate) {
-    const endTime = new Date(props.item.offerDate.endDate);
-    const endTimeMs = endTime.getTime();
-    timer = useTimer(endTimeMs);
-  }
+  // let timer;
+  // if (props.item.offerDate) {
+  //   const endTime = new Date(props.item.offerDate.endDate);
+  //   const endTimeMs = endTime.getTime();
+  //   timer = useTimer(endTimeMs);
+  // }
   </script>
   

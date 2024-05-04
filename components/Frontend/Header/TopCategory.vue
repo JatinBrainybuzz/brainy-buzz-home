@@ -9,12 +9,12 @@
       </button>
       <Transition>
         <!-- Navigation bar -->
-        <div>
-        <nav v-if="isActive" class="block absolute w-full h-[600%] z-20 transition-all duration-3 ease-in-out overflow-auto bg-white no-scrollbar ">
-          <ul class="my-2 mx-3 ">
+        <div class="">
+        <nav v-if="isActive" class=" absolute w-full h-[600%] has-[:submenu]:overflow-visible z-20 no-scrollbar transition-all duration-3 ease-in-out overflow-auto bg-white ">
+          <ul class="my-2 mx-3">
             <!-- Categories  -->
-              <li  v-for="(item, i) in items.category" :key="i" class="group has-dropdown top-1/2 right-0 text-sm text-gray-600">
-                <NuxtLink :to="`/product-category/${item.category_url}`" class="cursor-pointer relative flex gap-8 items-center pb-1 border-b-2 overflow-auto">
+              <li  v-for="(item, i) in items.category" :key="i" class="group relative has-dropdown top-1/2 right-0 text-sm text-gray-600">
+                <NuxtLink :to="`/product-category/${item.category_url}`" class="cursor-pointer relative flex gap-8 items-center pb-1 border-b-2">
                     <span v-if="item.image">
                         <img class="rounded-full w-16 h-16" :src="item.image" :alt="item.name">
                     </span>
@@ -25,7 +25,7 @@
                   </NuxtLink>
 
                 <!-- Sub Categories  -->
-                <!-- <ul v-if="item.haveChildren" class="absolute -right-48 rounded-md top-2 px-6 bg-white min-w-[200px] h-auto shadow-md z-50 hidden group-hover:block">
+                <!-- <ul v-if="item.haveChildren" class="absolute submenu -right-48 rounded-md top-2 px-6 bg-white min-w-[200px] h-auto shadow-md z-50 hidden group-hover:block">
                   <li v-for="(child, i) in item.childData" :key="i" class="mx-auto my-4 border-b-2 last:border-b-0">
                       <NuxtLink class="cursor-pointer" :to="`/product-category/${item.category_url}/product-sub-category/${child.name}`">
                       <span class="">
@@ -37,6 +37,9 @@
             </li>
           </ul>
         </nav>
+        <div v-for="(item, i) in items.category" :key="i"> 
+          
+        </div>
         </div>
       </Transition>
     </div>
@@ -50,7 +53,12 @@
   const items = defineProps({
     category: Array
   })
-  console.log(items.category)
+ function handleHover(i) {
+
+ }
+
+
+
 </script>
   
   <style scoped>

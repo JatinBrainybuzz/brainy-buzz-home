@@ -3,7 +3,7 @@
             <div class="container">
             <div class="tp-mega-menu-wrapper relative">
                 <div class="flex items-center">
-                <div class="xl:w-1/4 lg:w-1/4">
+                <div class="xl:w-1/4 lg:w-1/4 relative">
                     <!-- categories start -->
                     <FrontendHeaderTopCategory :category="props.category"/>
                     <!-- categories end -->
