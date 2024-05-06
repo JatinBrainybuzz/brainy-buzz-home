@@ -1,8 +1,8 @@
 <template>
     <div class="tp-shop-widget-content">
-      <div class="tp-shop-widget-categories">
-        <ul>
-          <li v-for="(category, i) in data" :key="i">
+      <div class=" h-72 overflow-y-scroll no-scrollbar pr-10">
+        <ul class="divide-y ml-4">
+          <li v-for="(category, i) in items.data" :key="i" class="my-2 hover:text-primary hover:scale-110">
             <a
               class="cursor-pointer"
             >
@@ -20,6 +20,6 @@
     data: Array
   })
 
-console.log(data)
+// console.log(data)
   </script>
   

@@ -1,6 +1,13 @@
 <template>
     <section class="tp-shop-area pb-96">
+      <NuxtPage />
       <div class="container">
+        <div class=" text-start mx-32 mt-12 mb-8">
+         <span class=" text-4xl ">Welcome to {{ routeName }} </span>
+         <span>
+
+         </span>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 xl:grid-cols-4">
           <div class="">
             <!-- shop sidebar start -->
@@ -47,7 +54,7 @@
   </template>
   
   <script setup >
-import { Swiper, SwiperSlide } from 'swiper/vue';
+  import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 // import 'swiper/css/navigation';
 import 'swiper/css/grid';
@@ -58,8 +65,13 @@ import { Grid , Pagination} from "swiper/modules";
 const HOMEPAGE_API = "http://localhost:8000/api/home/get-all-homepage-data?order_id=13&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&guestToken=zqhlljhc2vcvt182507tnksealg0jr9ab8hnreov&routePath=/product/filter&url&activity=visited_website";
 const {  data: HomeAPI } = await useLazyFetch(HOMEPAGE_API);
 const new_arrival = HomeAPI.value.data.product.new_arrival
-definePageMeta ({
-    layout: 'product'
-})
+// definePageMeta ({
+//     layout: 'product'
+// })
+
+const { currentRoute } = useRouter();
+const routeName = currentRoute.value.name;
+// console.log(routeName)
+
   </script>
   

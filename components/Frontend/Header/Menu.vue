@@ -41,7 +41,7 @@
   })
 
   const limitedItems = items.category.slice(0, 6);
-  console.log(limitedItems)
+  // console.log(limitedItems)
 </script>
 
 <style scoped>

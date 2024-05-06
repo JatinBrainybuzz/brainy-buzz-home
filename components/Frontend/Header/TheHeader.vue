@@ -21,7 +21,10 @@
 
                 <div class="relative py-2">
                     <UBadge size="sm" :ui="{ rounded: 'rounded-full' }" class="inline-block absolute right-[-12px] top-[-2px] font-bold text-center">0</UBadge>
-                    <button type="button" class=""> <Icon name="solar:bag-5-linear" size="2rem"/></button>
+                    <NuxtLink to="/cart" >
+                    <button type="button" class=""> 
+                        <Icon name="solar:bag-5-linear" size="2rem"/></button>
+                    </NuxtLink>
                 </div>
                 </div>
         </nav>

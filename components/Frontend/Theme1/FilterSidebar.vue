@@ -17,7 +17,7 @@
       <div class="shop-widget mb-50">
         <h3 class="shop-widget-title">Categories</h3>
         <!-- filter categories start -->
-        <shop-sidebar-filter-categories :load_more="true" />
+        <SidebarFilterCategory :data="category" />
         <!-- filter categories end -->
       </div>
       <!-- product rating -->
