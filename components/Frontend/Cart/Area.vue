@@ -19,7 +19,7 @@
                     </thead>
                     <tbody>
                       <!-- cart item start -->
-                         
+                         <FrontendCartItem />
                       <!-- <cart-item v-for="item in cartStore.cart_products" :key="item.id" :item="item" /> -->
                       <!-- cart item end -->
                     </tbody>
@@ -87,6 +87,7 @@
   </template>
   
   <script setup>
+
   
   </script>
   

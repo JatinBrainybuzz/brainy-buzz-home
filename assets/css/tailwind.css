@@ -24,6 +24,9 @@
   }
 
   @layer components {
+    .btn{
+      @apply px-2 py-2 bg-primary rounded-md text-white;
+    }
     .transition-1{
       @apply transition-all duration-300 ease-out;
     }
@@ -63,12 +66,48 @@
       @apply hover:text-primary mx-auto my-4;
     }
 
+    .nav-link{
+      @apply text-lg px-4 py-2 relative cursor-pointer  active:bg-primary-100;
+    }
+    .profile-count{
+      @apply absolute top-0 right-[-8px] w-6 h-6 leading-5 border-2 border-white bg-primary text-white rounded-full text-center text-xs font-medium;
+    }
+    .tab-pane{
+      @apply hidden active:block;
+    }
+    .active{
+      @apply block bg-primary-50 text-primary-500;
+    }
+    .activeTab {
+      @apply block transition-1;
+    }
   }
 
   @layer utilities {
    /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+.profile__input{
+  @apply px-2
+}
+.profile__input1{
+  @apply w-full h-10 leading-4 px-4 md:px-10 border border-gray-200 bg-white text-black;
+}
+.nav-link::after {
+  position: absolute;
+  content: "";
+  left: auto;
+  right: 0;
+  bottom: -1px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--tp-common-black);
+  -webkit-transition: all 0.3s 0s ease-in-out;
+  -moz-transition: all 0.3s 0s ease-in-out;
+  -ms-transition: all 0.3s 0s ease-in-out;
+  -o-transition: all 0.3s 0s ease-in-out;
+  transition: all 0.3s 0s ease-in-out;
 }
 
 
