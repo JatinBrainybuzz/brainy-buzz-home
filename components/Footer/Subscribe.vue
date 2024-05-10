@@ -8,7 +8,7 @@
         <img class="absolute top-[-5%] right-[12%] z-[-1]" src="/img/subscribe/subscribe-shape-4.png" alt="shape">
   
         <div class=" absolute top-[24%] right-[17%] z-[-2] width-[399px] height-[110px]">
-          <img class="absolute lg:top-[-34%] left-[-6%] top-[-70%]" src="/img/subscribe/plane.png" alt="plane">
+          <img class="absolute md:top-[-34%] left-[-6%] -top-[35%]" src="/img/subscribe/plane.png" alt="plane">
           <FooterAnimatedLine />
         </div>
       </div>

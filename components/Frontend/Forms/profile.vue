@@ -1,8 +1,7 @@
 <template>
     <form >
         <div class="grid grid-cols-1 md:grid-cols-2">
-            <div class="">
-              <div class="profile__input-box">
+              <div class="col-span-2 md:col-span-1">
                 <div class="profile__input relative mb-6">
                     <input type="text" placeholder="Enter your username" class="profile__input1">
                     <span class=" absolute top-1/2 left-5 transform -translate-y-1/2">
@@ -10,10 +9,9 @@
                     </span>
                 </div>
               </div>
-            </div>
           
-          <div class="">
-              <div class="profile__input-box">
+          
+              <div class="col-span-2 md:col-span-1">
                 <div class="profile__input relative mb-6">
                     <input type="email" placeholder="Enter your email" class="profile__input1">
                     <span class=" absolute top-1/2 left-5 transform -translate-y-1/2">
@@ -21,28 +19,22 @@
                     </span>
                 </div>
               </div>
-          </div>
-          <div class="">
-              <div class="profile__input-box">
+              <div class="col-span-2 md:col-span-1">
                 <div class="profile__input relative mb-6">
                     <input type="text" placeholder="Enter username" class="profile__input1">
                     <span class=" absolute top-1/2 left-5 transform -translate-y-1/2">
                         <Icon name="ri:facebook-fill" />
                     </span>
                 </div>
-              </div>
           </div>
-          <div class="">
-              <div class="profile__input-box">
+              <div class="col-span-2 md:col-span-1">
                 <div class="profile__input relative mb-6">
                     <input type="text" placeholder="Enter username" class="profile__input1">
                     <span class=" absolute top-1/2 left-5 transform -translate-y-1/2"><Icon name="bi:twitter-x" />
                     </span>
                 </div>
               </div>
-          </div>
-          <div class="">
-              <div class="profile__input-box">
+              <div class="col-span-2 md:col-span-1">
                 <div class="profile__input relative mb-6">
                     <input type="text" placeholder="Enter your number" class="profile__input1">
                     <span class=" absolute top-1/2 left-5 transform -translate-y-1/2">
@@ -50,9 +42,7 @@
                     </span>
                 </div>
               </div>
-          </div>
-          <div class="">
-              <div class="profile__input-box">
+              <div class="col-span-2 md:col-span-1">
                 <div class="profile__input relative mb-6">
                     <USelect
                         color="white"
@@ -67,7 +57,6 @@
                         v-model="country"                    />
                 </div>
               </div>
-          </div>
           <div class=" col-span-2">
               <div class="profile__input-box">
                 <div class="profile__input relative mb-6">

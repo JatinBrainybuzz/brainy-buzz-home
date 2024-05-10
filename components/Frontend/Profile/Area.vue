@@ -1,17 +1,17 @@
 <template>
-    <section class="profile__area pt-32 pb-32">
-        <div class="container">
+    <section class="profile__area md:pt-16 lg:pt-24 md:pb-18 lg:pb-24">
+        <div class="container px-2 md:px-14 xl:px-20 pb-16">
           <div class="profile__inner relative">
               <div class="grid grid-cols-1 lg:grid-cols-3">
                 <div class="">
-                    <div class=" mx-11 mt-8 shadow-2xl">
+                    <div class=" mx-2 md:mx-11 md:mt-8 mt-2 shadow-2xl">
                       <!-- profile nav start -->
                         <FrontendProfileNav  @activeTab="handleTabClick"/>
                       <!-- profile nav end -->
                     </div>
                 </div>
                 <div class="lg:col-span-2">
-                    <div class="bg-white shadow-lg p-10">
+                    <div class="bg-white shadow-lg p-2 md:p-10 md:mr-6">
                       <div class="tab-content " id="profile-tabContent">
                           <div class="tab-pane transition-1"
                           :class="{ 'activeTab': activeTab === 0 }"
@@ -26,22 +26,22 @@
                           <div class="tab-pane transition-1"
                           :class="{ 'activeTab': activeTab === 2 }" >
                             <!-- <profile-password/> -->
-                            thing
+                            <FrontendProfileAddress />
                           </div>
                           <div class="tab-pane transition-1" 
                           :class="{ 'activeTab': activeTab === 3 }">
                             <!-- <profile-address/> -->
-                            what
+                              <FrontendProfileOrder />
                           </div>
                           <div class="tab-pane transition-1" 
                           :class="{ 'activeTab': activeTab === 4 }">
-                            <!-- <profile-orders/> -->
-                            yoyo
+                            <FrontendProfileNotification />
+
                           </div>
                           <div class="tab-pane transition-1"
                           :class="{ 'activeTab': activeTab === 5 }">
                             <!-- <profile-notification/> -->
-                            lala
+                              <FrontendProfilePassword />
                           </div>
                       </div>
                     </div>

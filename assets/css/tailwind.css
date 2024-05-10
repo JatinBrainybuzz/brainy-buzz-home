@@ -92,8 +92,40 @@
   @apply px-2
 }
 .profile__input1{
-  @apply w-full h-10 leading-4 px-4 md:px-10 border border-gray-200 bg-white text-black;
+  @apply w-full h-10 leading-4 px-10 border border-gray-200 bg-white text-black;
 }
+.profile-input-box {
+  @apply relative mb-8;
+}
+.profile-input-box input{
+  @apply w-full border bg-white text-sm ;
+}
+
+.profileInputArea {
+  @apply h-14 bg-white border text-sm text-black;
+}
+
+.profile_Notification .form-check-label{
+  @apply text-base ml-2 hover:cursor-pointer text-black;
+}
+
+.profile_ticket table th{
+  @apply text-black border-white shadow-none;
+}
+
+
+
+.profile-input-title label{
+  @apply text-sm text-black absolute -top-2 left-5 py-1 bg-white leading-4;
+}
+.address-content p{
+  @apply text-sm mb-3;
+}
+
+.address-content p span{
+  @apply text-black font-semibold mr-2;
+}
+
 .nav-link::after {
   position: absolute;
   content: "";
