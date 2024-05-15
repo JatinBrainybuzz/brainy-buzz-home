@@ -5,12 +5,12 @@
         <Icon name="material-symbols:menu" />
       </span>
         All Categories 
-        <Icon name="material-symbols:arrow-drop-down-rounded" class="absolute right-5 top-9"/>
+        <Icon name="material-symbols:arrow-drop-down-rounded" class="absolute right-5 top-6"/>
       </button>
       <Transition>
         <!-- Navigation bar -->
         <div class="">
-        <nav v-if="isActive" class=" absolute w-full h-[600%] has-[:submenu]:overflow-visible z-20 no-scrollbar transition-all duration-3 ease-in-out overflow-auto bg-white ">
+        <nav v-if="isActive" class=" absolute w-full h-[600%] shadow-lg has-[:submenu]:overflow-visible z-50 no-scrollbar transition-all duration-3 ease-in-out overflow-auto bg-white ">
           <ul class="my-2 mx-3">
             <!-- Categories  -->
               <li  v-for="(item, i) in items.category" :key="i" class="group relative has-dropdown top-1/2 right-0 text-sm text-gray-600">

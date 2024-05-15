@@ -8,7 +8,7 @@
                     <span class=" text-center text-base font-normal hover:text-primary">
                         {{item.name}}
                     </span>
-                    <Icon v-if="item.haveChildren" name="material-symbols:arrow-drop-down-rounded" class="absolute top-9 left-100 mr-1"/>
+                    <Icon v-if="item.haveChildren" name="material-symbols:arrow-drop-down-rounded" class="absolute top-6 left-100 mr-1"/>
                  </NuxtLink>
                   <ul v-if="item.haveChildren" class="hidden group-hover:block absolute min-w-[300px] h-auto z-20 bg-white rounded-b-md top-18 pt-6">
                     <li v-for="(child,i) in item.childData" :key="i" 

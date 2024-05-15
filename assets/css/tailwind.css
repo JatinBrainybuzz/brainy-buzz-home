@@ -59,7 +59,7 @@
       @apply min-w-[200px] bg-white z-50  shadow-lg p-12 px-6 pb-20 transform origin-top transition duration-100;
     }
     .category-menu-btn{
-      @apply font-medium text-base text-white bg-primary w-full px-12 py-7 text-left relative;
+      @apply font-medium text-base text-white bg-primary w-full px-12 py-4 text-left relative;
     }
 
     .has-dropdown{
@@ -91,6 +91,29 @@
 .profile__input{
   @apply px-2
 }
+.stary::after { 
+position: absolute;
+content: "";
+left: 0;
+top: 8px;
+width: 4px;
+height: 4px;
+border-radius: 50%;
+background-color: #A8ACB0;
+}
+
+.login-mail::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  width: 100%;
+  height: 1px;
+  background-color: #E0E2E3;
+  z-index: -1;
+}
+
 .profile__input1{
   @apply w-full h-10 leading-4 px-10 border border-gray-200 bg-white text-black;
 }
@@ -112,8 +135,20 @@
 .profile_ticket table th{
   @apply text-black border-white shadow-none;
 }
+.breadcrumb__list span:not(:last-child)::after {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: #A8ACB0;
+  border-radius: 50%;
+}
 
-
+.nav-tabs, .nav-link{
+@apply p-0 m-0 border-none;
+}
 
 .profile-input-title label{
   @apply text-sm text-black absolute -top-2 left-5 py-1 bg-white leading-4;
