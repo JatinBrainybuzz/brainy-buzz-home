@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1">
           <div>
             <div class="breadcrumb__content relative z-[1]">
-              <h3 class="font-medium text-2xl mb-2 leading-none">{{title}}</h3>
+              <h3 class="font-medium text-4xl mb-2 leading-none">{{title}}</h3>
               <div class="relative font-normal text-gray-600 text-base">
                 <span class="mr-2"><nuxt-link href="/">Home</nuxt-link></span>->
                 <span>{{subtitle}}</span>

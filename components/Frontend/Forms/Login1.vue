@@ -52,7 +52,7 @@
         </div>
         <div class="tp-login-forgot">
           <nuxt-link href="/forgot" class="group hover:text-primary transition duration-300">Forgot Password?
-          <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+          <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
         </nuxt-link>
         </div>
       </div>
