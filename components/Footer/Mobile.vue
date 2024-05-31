@@ -1,6 +1,6 @@
 <template>
-    <div class="md:hidden block fixed left-0 bottom-0 w-full h-14 z-50 bg-white">
-        <div class="h-full shadow-lg">
+    <div class="md:hidden block fixed left-0 bottom-0 w-full h-14 z-10">
+        <div class="h-full shadow-lg z-[999] bg-white">
             <div class=" my-1 h-full items-center flex justify-around">
                 <div class="inline-block ml-4 text-primary">
                     <NuxtLink to="/" class="flex flex-col justify-center items-center ">
@@ -27,15 +27,15 @@
                     </NuxtLink>
                 </div>
                 <div class="inline-block text-primary">
-                    <NuxtLink to="/" class="flex flex-col justify-center items-center" @click="toggleProfile">
+                    <NuxtLink  class="flex flex-col justify-center items-center cursor-pointer" @click="toggleProfile">
                         <Icon name="mdi:account-circle" size="1.8rem"/>
                         <span class=" text-xs">Profile</span>
                     </NuxtLink>
                 </div>
             </div>
         </div>
-        <div class=" transition-1">
-            
+        <div class=" transition-1" >
+            <SidebarMobile v-if=showSidebar @close="toggleProfile" />
         </div>
     </div>
 </template>
