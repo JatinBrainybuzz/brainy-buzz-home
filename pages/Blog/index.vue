@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="my-20">
     <!-- blog details area start -->
-    This is a blog page.
+    This is where you add all the blog posts you got.
     <!-- blog details area end -->
   </div>
 </template>
