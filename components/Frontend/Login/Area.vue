@@ -36,7 +36,7 @@
                     <div class="my-1 text-left font-normal text-gray-500">
                         OTP
                     </div>
-                    <div class="h-12 bg-white ">
+                    <div class="h-12 bg-white">
                         <input id="otp" type="text" placeholder="5472" class=" w-full h-full px-2 border rounded-md border-gray-300 text-base text-black" />
                     </div>
                     <div class=" text-white bg-primary hover:shadow-lg mt-2 py-2 rounded-md cursor-pointer">

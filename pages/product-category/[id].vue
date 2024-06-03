@@ -65,7 +65,7 @@ import { Grid , Pagination} from "swiper/modules";
 // definePageMeta ({
 //     layout: 'product'
 // })
-const HOMEPAGE_API = "http://localhost:8000/api/home/get-all-homepage-data?order_id=13&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&guestToken=zqhlljhc2vcvt182507tnksealg0jr9ab8hnreov&routePath=/product/filter&url&activity=visited_website";
+const HOMEPAGE_API = "http://localhost:8000/api/home/get-all-homepage-data?order_id=9&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&guestToken=zqhlljhc2vcvt182507tnksealg0jr9ab8hnreov&routePath=/product/filter&url&activity=visited_website&domain=demo.brainybuzz.co";
 const {  data: HomeAPI } = await useLazyFetch(HOMEPAGE_API);
 const new_arrival = HomeAPI.value.data.product.new_arrival
 // definePageMeta ({

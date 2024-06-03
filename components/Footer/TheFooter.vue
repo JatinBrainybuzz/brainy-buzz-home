@@ -20,10 +20,10 @@
           <h4 class=" text-4xl mb-4">My Account</h4>
           <div class="mb-6 font-medium text-base relative leading-loose">
             <ul>
-              <li><a href="#">Track Orders</a></li>
-              <li><a href="#">Shipping</a></li>
-              <li><a href="#">Wishlist</a></li>
-              <li><a href="#">Cart</a></li>
+              <li><NuxtLink to="/track-order">Track Orders</NuxtLink></li>
+              <li><NuxtLink to="">Shipping</NuxtLink></li>
+              <li><NuxtLink to="/wishlist">Wishlist</NuxtLink></li>
+              <li><NuxtLink to="/cart">Cart</NuxtLink></li>
             </ul>
           </div>
         </div>
@@ -32,12 +32,12 @@
             <h4 class="text-4xl mb-4">Information</h4>
             <div class="tp-footer-widget-content leading-loose">
               <ul>
-                <li><a href="#">Our Story</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Latest News</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><NuxtLink to="">Our Story</NuxtLink></li>
+                <li><NuxtLink to="">Careers</NuxtLink></li>
+                <li><NuxtLink to="/privacy">Privacy Policy</NuxtLink></li>
+                <li><NuxtLink to="terms">Terms & Conditions</NuxtLink></li>
+                <li><NuxtLink to="">Latest News</NuxtLink></li>
+                <li><NuxtLink to="/contact">Contact Us</NuxtLink></li>
               </ul>
             </div>
           </div>

@@ -10,13 +10,13 @@
                 <div class="flex items-center gap-8">
                     <div class="relative hidden md:block">
                         <button type="button" class="text-center "> <Icon name="material-symbols:account-circle-full" size="2rem" class="mb-2 hover:drop-shadow-sm"/>
-                        <span class="ml-3 font-400 text-2xl hover:drop-shadow-2xl">Login</span>
+                        <NuxtLink to='/login' ><span class="ml-3 font-400 text-2xl hover:drop-shadow-2xl">Login</span></NuxtLink>
                     </button>
                     </div>
                 <div class="relative">
                     <!-- <span class="badge" > 0</span> -->
                     <UBadge size="sm" :ui="{ rounded: 'rounded-full'}"  class="inline-block absolute right-[-13px] top-[-6px] font-bold text-center">0</UBadge>
-                    <button type="button" class=""> <Icon name="solar:heart-angle-outline" size="2rem"/></button>
+                    <NuxtLink to="/wishlist"><button type="button" class=""> <Icon name="solar:heart-angle-outline" size="2rem"/></button></NuxtLink>
                 </div>
 
                 <div class="relative py-2">

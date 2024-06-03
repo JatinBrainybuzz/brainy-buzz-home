@@ -4,7 +4,7 @@
         <div>
             <ul class="flex justify-center items-center gap-8 ml-4">
                 <li v-for="(item,i) in limitedItems" :key="i" class="group mr-4">
-                  <NuxtLink :to="`product-category/${item.name}`">
+                  <NuxtLink :to="`/product-category/${item.name}`">
                     <span class=" text-center text-base font-normal hover:text-primary">
                         {{item.name}}
                     </span>
