@@ -5,6 +5,9 @@
         </div>
         
         <div class="flex gap-8">
+          <div>
+              <FrontendColorPicker />
+          </div>
         <!-- <Dropdown title="English" menu_item1="Hindi" menu_item2="Spanish" menu_item3="Russian" menu_item4="Franch"/>
         <Dropdown title="Setting" menu_item1="My Profile" menu_item2="WishList" menu_item3="Cart" menu_item4="Logout"/> -->
         <UDropdown :items="items" mode="hover" :popper="{ placement: 'bottom-start' }"  class="hidden md:block">

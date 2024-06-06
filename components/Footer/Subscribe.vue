@@ -1,5 +1,5 @@
 <template>
-    <section class="tp-subscribe-area bg-allports-500 relative z-[1] h-[200px] justify-center items-center">
+    <section class="tp-subscribe-area bg-primary-500 relative z-[1] h-[200px] justify-center items-center">
     
       <div class="tp-subscribe-shape -z-10">
         <img class="absolute top-0 left-0 z-[-1] mix-blend-luminosity opacity-40 max-w-[100%]" src="/img/subscribe/subscribe-shape-1.png" alt="shape">

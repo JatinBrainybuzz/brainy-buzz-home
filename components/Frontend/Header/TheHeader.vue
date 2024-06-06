@@ -2,7 +2,7 @@
     <div class="shadow-md border-b-1">
         <header class=" relative px-6">
             <nav class="container mx-auto p-4 justify-between flex sticky">
-                <NuxtLink class="" to="/">
+                <NuxtLink to="/">
                     <img src="/public/brainybuzzlong.png" class="w-auto h-20 hidden md:block" alt="Image Link here">
                     <img src="/public/bbLogo.png" class="w-auto h-16 md:hidden" alt="Image Link here">
                 </NuxtLink>

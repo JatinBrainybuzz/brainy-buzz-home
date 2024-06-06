@@ -1,6 +1,6 @@
 export default defineAppConfig({
-    ui: {
-      primary: 'allports',
-      gray: 'cool',
-    }
-  })  
+  ui: {
+    primary: 'allports',
+    gray: 'cool',
+  }
+})

@@ -24,18 +24,18 @@
       <div class="shop-widget mb-50">
         <h3 class="shop-widget-title">Top Rated Products</h3>
         <!-- filter top-product start -->
-        <shop-sidebar-top-product />
+        <!-- <shop-sidebar-top-product /> -->
         <!-- filter top-product end -->
       </div>
       <!-- brand -->
       <div class="shop-widget mb-50">
         <h3 class="shop-widget-title">Popular Brands</h3>
         <!-- filter brand start -->
-        <shop-sidebar-filter-brand :load_more="true"/>
+        <!-- <shop-sidebar-filter-brand :load_more="true"/> -->
         <!-- filter brand end -->
       </div>
       <!-- reset filter start -->
-      <shop-sidebar-reset-filter :load_more="true" />
+      <!-- <shop-sidebar-reset-filter :load_more="true" /> -->
       <!-- reset filter end -->
     </div>
   </template>

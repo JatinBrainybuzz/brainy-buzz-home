@@ -8,7 +8,7 @@
                 <div>
                     <NuxtLink to="/"class=" text-2xl group font-medium text-primary" >
                         BrainyBuzz
-                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
                     </NuxtLink>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                         <span>New on Our Platform?</span>
                         <div>
                             <NuxtLink to="/register" class="text-primary group">Create an Account
-                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
                             </NuxtLink>
                         </div>
                     </div>

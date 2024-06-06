@@ -16,7 +16,5 @@ const {  data: items } = await useLazyFetch(HOMEPAGE_API);
 const parent_categories = items.value.data.parent_category;
 const arr = items.value.data.banner.below_category.data;
 const new_arrival = items.value.data.product.new_arrival;
-
-// console.log(arr)
 </script>
 
