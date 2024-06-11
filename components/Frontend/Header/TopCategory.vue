@@ -14,7 +14,7 @@
           <ul class="my-2 mx-3">
             <!-- Categories  -->
               <li  v-for="(item, i) in items.category" :key="i" class="group relative has-dropdown top-1/2 right-0 text-sm text-gray-600">
-                <NuxtLink :to="`/product-category/${item.category_url}`" class="cursor-pointer relative flex gap-8 items-center pb-1 border-b-2">
+                <NuxtLink :to="{name: 'product-category-id', params: { id: item.category_url }}" class="cursor-pointer relative flex gap-8 items-center pb-1 border-b-2">
                     <span v-if="item.image">
                         <img class="rounded-full w-16 h-16" :src="item.image" :alt="item.name">
                     </span>

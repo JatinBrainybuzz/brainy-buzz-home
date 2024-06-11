@@ -9,7 +9,7 @@
                         <Icon name="material-symbols:home" />
                       </span>
                       <span class="font-normal text-base relative pr-3 mr-1">
-                        <NuxtLink to="/">Home</NuxtLink>
+                        <NuxtLink :to="{name: 'home'}">Home</NuxtLink>
                       </span>   
                       <span class="font-normal text-base relative pr-3 mr-1"><a href="#">parent</a></span>
                       <span class="font-normal text-base relative pr-3 mr-1"><a href="#">children</a></span>

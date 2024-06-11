@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="mt-16 flex ml-24">
-                <NuxtLink to="/cart" >
+                <NuxtLink :to="{name: 'cart'}" >
                     <span class="btn px-6 text-xl hover:scale-110">
                         Go To Cart
                     </span>

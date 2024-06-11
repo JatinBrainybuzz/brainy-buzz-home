@@ -38,7 +38,7 @@
               <span class="flex justify-center items-center gap-3">
                 Remember Password?
                 <div class="group">
-                  <NuxtLink to="/login" class="text-primary">
+                  <NuxtLink :to="{name: 'login' }" class="text-primary">
                     Login
                     <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-500"></span>
                   </NuxtLink>

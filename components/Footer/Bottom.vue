@@ -5,7 +5,7 @@
                 <div class="grid md:grid-cols-2 items-center grid-cols-1">
                     <div >
                         <p>
-                            © {{ new Date().getFullYear() }} All Rights Reserved | by <NuxtLink href="/">Brainybuzz</NuxtLink>.
+                            © {{ new Date().getFullYear() }} All Rights Reserved | by <NuxtLink :to="{name: 'home'}">Brainybuzz</NuxtLink>.
                         </p>
                     </div>
                 </div>

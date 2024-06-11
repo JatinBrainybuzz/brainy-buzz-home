@@ -6,7 +6,7 @@
                     <img src="/brainybuzzlong.png" alt="">
                 </div>
                 <div>
-                    <NuxtLink to="/"class=" text-2xl group font-medium text-primary" >
+                    <NuxtLink :to="{name: 'home'}" class=" text-2xl group font-medium text-primary" >
                         BrainyBuzz
                         <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
                     </NuxtLink>
@@ -45,7 +45,7 @@
                     <div class=" font-extralight flex gap-2 mt-4 justify-center text-gray-500">
                         <span>New on Our Platform?</span>
                         <div>
-                            <NuxtLink to="/register" class="text-primary group">Create an Account
+                            <NuxtLink :to="{name: 'register'}" class="text-primary group">Create an Account
                             <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
                             </NuxtLink>
                         </div>

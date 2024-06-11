@@ -5,7 +5,7 @@
       <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:divide-x pt-10">
           <div class="container ml-4">
-            <NuxtLink class="" to="/">
+            <NuxtLink class="" :to="{name: 'home'}">
               <img src="/public/brainybuzzlong.png" class="w-auto h-20 hidden md:block" alt="Image Link here">
               <img src="/public/bbLogo.png" class="w-auto h-16 md:hidden items-center" alt="Image Link here">
             </NuxtLink>
@@ -20,10 +20,10 @@
           <h4 class=" text-4xl mb-4">My Account</h4>
           <div class="mb-6 font-medium text-base relative leading-loose">
             <ul>
-              <li><NuxtLink to="/track-order">Track Orders</NuxtLink></li>
-              <li><NuxtLink to="">Shipping</NuxtLink></li>
-              <li><NuxtLink to="/wishlist">Wishlist</NuxtLink></li>
-              <li><NuxtLink to="/cart">Cart</NuxtLink></li>
+              <li><NuxtLink :to="{name: 'track'}">Track Orders</NuxtLink></li>
+              <li><NuxtLink :to="{name: 'home'}">Shipping</NuxtLink></li>
+              <li><NuxtLink :to="{name: 'wishlist'}">Wishlist</NuxtLink></li>
+              <li><NuxtLink :to="{name: 'cart'}">Cart</NuxtLink></li>
             </ul>
           </div>
         </div>
@@ -32,12 +32,12 @@
             <h4 class="text-4xl mb-4">Information</h4>
             <div class="tp-footer-widget-content leading-loose">
               <ul>
-                <li><NuxtLink to="">Our Story</NuxtLink></li>
-                <li><NuxtLink to="">Careers</NuxtLink></li>
-                <li><NuxtLink to="/privacy">Privacy Policy</NuxtLink></li>
-                <li><NuxtLink to="terms">Terms & Conditions</NuxtLink></li>
-                <li><NuxtLink to="">Latest News</NuxtLink></li>
-                <li><NuxtLink to="/contact">Contact Us</NuxtLink></li>
+                <li><NuxtLink :to="{name: 'home'}">Our Story</NuxtLink></li>
+                <li><NuxtLink :to="{name: 'home'}">Careers</NuxtLink></li>
+                <li><NuxtLink :to="{name: 'privacy'}">Privacy Policy</NuxtLink></li>
+                <li><NuxtLink :to="{name: 'terms'}">Terms & Conditions</NuxtLink></li>
+                <li><NuxtLink :to="{name: 'home'}">Latest News</NuxtLink></li>
+                <li><NuxtLink :to="{name: 'contact'}">Contact Us</NuxtLink></li>
               </ul>
             </div>
           </div>

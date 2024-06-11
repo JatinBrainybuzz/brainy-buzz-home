@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NuxtPage />
+        This is just an experiment for routes.
     </div>
 </template>
 

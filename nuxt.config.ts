@@ -4,4 +4,5 @@ export default defineNuxtConfig({
     enabled: true,
   },
   modules: ["@nuxt/ui", 'nuxt-icon', "@samk-dev/nuxt-vcalendar"],
+  
 })

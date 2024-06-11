@@ -1,10 +1,7 @@
 <template>
     <div>
         <!-- <FrontendLoginBreadcrumb title="My account" subtitle="My account" :center="true" /> -->
-
         <FrontendLoginArea />
-
-        
     </div>
   </template>
   
@@ -12,6 +9,6 @@
   definePageMeta({
   layout: false 
 })
-  useSeoMeta({ title: "Login Page" });
+  useSeoMeta({ title: "Login Page 123" });
   </script>
   

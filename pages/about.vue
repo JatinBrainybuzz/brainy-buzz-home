@@ -1,7 +1,7 @@
 <template>
     <div>
         Hello world. <br>
-        <NuxtLink to="/">
+        <NuxtLink :to="{name: 'home'}">
             <UButton class="rounded-full">
                 Home
             </UButton>
