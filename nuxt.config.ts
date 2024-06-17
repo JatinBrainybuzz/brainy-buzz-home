@@ -4,5 +4,8 @@ export default defineNuxtConfig({
     enabled: true,
   },
   modules: ["@nuxt/ui", 'nuxt-icon', "@samk-dev/nuxt-vcalendar"],
+  build: {
+    transpile: [/vue3-grid-layout-next/]
+  }
   
 })
