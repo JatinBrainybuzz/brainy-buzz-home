@@ -12,10 +12,15 @@
         </div>
       </div>
       <div>
-        <Swiper :slidesPerView="4" :spaceBetween="20" :pagination="true" :navigation="{
-                nextEl: '.tp-arrival-slider-button-next',
-                prevEl: '.tp-arrival-slider-button-prev',
-              }" :breakpoints="{
+        <Swiper :slidesPerView="4" :spaceBetween="20" 
+            :pagination="{
+              clickable: true,
+            }" 
+              :autoplay="{
+                delay: 2500,
+                disableOnInteraction: true,
+              }"
+              :breakpoints="{
                 '1200': {
                   slidesPerView: 4,
                 },
@@ -31,18 +36,18 @@
                 '0': {
                   slidesPerView: 1,
                 },
-              }" :modules="[Pagination, Navigation]" class="tp-product-arrival-active swiper-container">
+              }" :modules="modules" class="tp-product-arrival-active swiper-container">
           <SwiperSlide v-for="(item, i) in new_arrival" :key="i">
             <FrontendTheme1Card :item="item" />
           </SwiperSlide>
         </Swiper>
-        <grid-layout :layout.sync="layout" :col-num="12" :row-height="30" :is-draggable="true" :is-resizable="true"
+        <!-- <grid-layout :layout.sync="layout" :col-num="12" :row-height="30" :is-draggable="true" :is-resizable="true"
           :is-mirrored="false" :vertical-compact="true" :margin="[10, 10]" :use-css-transforms="true">
 
           <grid-item v-for="item in layout" :x="item.x" :y="item.y" :w="item.w" :h="item.h" :i="item.i" :key="item.i">
             {{item.i}}
           </grid-item>
-        </grid-layout>
+        </grid-layout> -->
       </div>
     </div>
   </section>
@@ -57,11 +62,11 @@
   import 'swiper/css/navigation';
   import 'swiper/css/pagination';
   import {
+    Autoplay,
     Pagination,
-    Navigation
   } from "swiper/modules";
-  import GridLayout from 'vue3-grid-layout-next';
-
+  // import GridLayout from 'vue3-grid-layout-next';
+  const modules = [Autoplay, Pagination]
   const props = defineProps({
     new_arrival: Array
   })
@@ -207,8 +212,8 @@
           "h": 2,
           "i": "19"
         }
-      ],
-    },
+      ]
+    }
   // console.log(props.new_arrival)
 </script>
 

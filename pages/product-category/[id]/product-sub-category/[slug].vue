@@ -23,7 +23,10 @@
                       :grid= "{
                           rows: 2
                       }"
-                      :pagination= true
+                      :spaceBetween="30"
+                      :pagination="{
+                        clickable: true,
+                      }"
                       :breakpoints="{
                           '1200': {
                           slidesPerView: 4,
@@ -64,8 +67,8 @@
   import 'swiper/css/grid';
   import 'swiper/css/pagination';
   // import { Grid , Pagination} from "swiper/modules";
-  
-    const HOMEPAGE_API = "http://localhost:8000/api/home/get-all-homepage-data?q=&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&url=https://demo.brainybuzz.co/&activity=visited_website&domain=demo.brainybuzz.co";
+  // const modules = [Grid, Pagination]
+    const HOMEPAGE_API = "https://demo.brainybuzz.co/api/home/get-all-homepage-data?q=&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&url=https://demo.brainybuzz.co/&activity=visited_website&domain=demo.brainybuzz.co";
     const {  data: HomeAPI } = await useLazyFetch(HOMEPAGE_API);
     // const new_arrival = toRef(() => HomeAPI.data.product.new_arrival)
     const new_arrival = computed (() => {return HomeAPI?.value?.data?.product?.new_arrival});
