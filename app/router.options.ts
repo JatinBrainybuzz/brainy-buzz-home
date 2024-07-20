@@ -6,7 +6,7 @@ export default <RouterConfig> {
     {
       name: 'home',
       path: '/',
-      component: () => import('~/pages/Index.vue').then(r => r.default || r),
+      component: () => import('~/pages/Index.vue').then(r => r.default || r)
     },
     {
       name: 'cart',
@@ -87,9 +87,19 @@ export default <RouterConfig> {
         component: () => import('~/pages/blog/[id].vue')
     },
     {
+        name: 'blog',
+        path: '/blog',
+        component: () => import('~/pages/blog/Index.vue')
+    },
+    {
         name: 'wishlist',
         path: '/wishlist',
         component: () => import('~/pages/Wishlist.vue')
+    },
+    {
+        name: 'Forgot Password',
+        path: '/forgot-password',
+        component: () => import('~/pages/Forgot.vue')
     },
 
   ],
