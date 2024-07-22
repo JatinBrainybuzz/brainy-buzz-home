@@ -41,7 +41,8 @@
   </template>
   
   <script setup>
-const HOMEPAGE_API = "https://demo.brainybuzz.co/api/home/get-all-homepage-data?q=&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&url=https://demo.brainybuzz.co/&activity=visited_website&domain=demo.brainybuzz.co";
+  const config = useRuntimeConfig()
+const HOMEPAGE_API = `${config.public.appUrl}/api/home/get-all-homepage-data?q=&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&url=https://demo.brainybuzz.co/&activity=visited_website&domain=demo.brainybuzz.co`;
 const {  data: HomeAPI } = await useLazyFetch(HOMEPAGE_API);
 const product = computed (() => {return HomeAPI?.value?.data?.product.trending })
 const category = computed (() => {return HomeAPI?.value?.data?.parent_category })

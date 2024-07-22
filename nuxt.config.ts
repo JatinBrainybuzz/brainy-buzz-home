@@ -6,6 +6,11 @@ export default defineNuxtConfig({
   modules: ["@nuxt/ui", 'nuxt-icon', "@samk-dev/nuxt-vcalendar"],
   build: {
     transpile: [/vue3-grid-layout-next/]
+  },
+  runtimeConfig: {
+    public: {
+      appUrl: process.env.APP_URL ?? "http://localhost:8000"
+    }
   }
   
 })
