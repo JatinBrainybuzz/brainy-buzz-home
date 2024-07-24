@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <!-- <div >
         <div>
         <div>
             <ul class="flex justify-center items-center gap-8 ml-4">
@@ -23,16 +23,16 @@
               </ul>
         </div>
         </div>
-    </div>
+    </div> -->
 </template>
 
 <script setup>
- const items = defineProps({
-    category: Array
-  })
+//  const items = defineProps({
+//     category: Array
+//   })
 
     // console.log(items);
-  const limitedItems = items.category.slice(0, 6);
+  // const limitedItems = items.category.slice(0, 6);
 </script>
 
 <style scoped>
