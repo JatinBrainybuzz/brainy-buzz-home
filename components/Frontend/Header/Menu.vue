@@ -31,8 +31,8 @@
     category: Array
   })
 
+    // console.log(items);
   const limitedItems = items.category.slice(0, 6);
-  // console.log(limitedItems)
 </script>
 
 <style scoped>
