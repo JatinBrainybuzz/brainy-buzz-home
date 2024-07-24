@@ -8,8 +8,7 @@
                     <div>
                         <NuxtLink :to="{name: 'home'}" class=" text-2xl group font-medium text-primary">
                             BrainyBuzz
-                            <span
-                                class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
                         </NuxtLink>
                     </div>
                 </div>
@@ -30,8 +29,11 @@
                                 <div class=" bg-white absolute -top-3 left-2 px-1 inline-block text-base text-black-title">
                                     <label for="Mobile">UserName</label>
                                 </div> -->
-                                <UFormGroup label="username" name="name">
+                                <UFormGroup name="name" :required="false">
                                     <UInput v-model="state.name"  placeholder="Enter Your Username..." />
+                                    <div class=" bg-white absolute -top-4 left-2 px-1 inline-block text-base">
+                                        <label for="Mobile">UserName</label>
+                                    </div>
                                 </UFormGroup>
                             </div>
 
@@ -42,8 +44,11 @@
                                 <div class=" bg-white absolute -top-3 left-2 px-1 inline-block text-base text-black-title">
                                     <label for="Mobile">Email</label>
                                 </div> -->
-                                <UFormGroup label="email" name="email">
+                                <UFormGroup name="email" :required="false">
                                     <UInput v-model="state.email"  placeholder="Enter Your email..." />
+                                    <div class=" bg-white absolute -top-4 left-2 px-1 inline-block text-base">
+                                        <label for="Mobile">Email</label>
+                                    </div>
                                 </UFormGroup>
                             </div>
                             <div class="flex gap-2 items-center mb-7">

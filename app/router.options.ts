@@ -34,7 +34,10 @@ export default <RouterConfig> {
     {
       name: 'register',
       path: '/register',
-      component: () => import('~/pages/Register.vue').then(r => r.default || r)
+      component: () => import('~/pages/Register.vue').then(r => r.default || r),
+      meta: {
+        layout: false
+      },
     },
     {
       name: 'track',
