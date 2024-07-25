@@ -80,9 +80,9 @@ export default <RouterConfig> {
         component: () => import('~/pages/product-category/[id]/product-sub-category/[slug].vue')
     },
     {
-        name: 'product-details-id',
-        path: '/product-details/:id*',
-        component: () => import('~/pages/product-details/[...id].vue')
+      name: 'product-details-id',
+      path: '/product-details/:category/:slug',
+      component: () => import('~/pages/product-details/[...id].vue')
     },
     {
         name: 'blog-id',
