@@ -6,7 +6,7 @@
     </div>
     <h3 class=" text-2xl md:text-3xl font-medium leading-4 mb-4">
       <!-- {{product.title}} -->
-      Headphones Wireless</h3>
+      {{ productDetail?.name }}</h3>
 
     <!-- inventory details -->
     <div class="tp-product-details-inventory flex items-center mb-4">
