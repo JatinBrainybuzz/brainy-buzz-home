@@ -1,7 +1,7 @@
 <template>
     <div :class="` my-16 mx-5 group bg-white border rounded-lg border-gray-300 hover:shadow-lg hover:border-white hover:border transition-1`">
       <div class="max-w-full border-gray-400 border-b rounded-t-lg md:w-auto relative overflow-hidden ">
-        <nuxt-link :href="`/product-details/${item.name}`">
+        <nuxt-link :to="{ name: 'product-details-id', params: {category: item.category, slug: item.slug } }">
           <img :src="item.image" alt="Product" class="group-hover:transform group-hover:scale-110 group-hover:transition-1" />
         </nuxt-link>
   
@@ -74,7 +74,7 @@
         </div>
         <div class="h-20">
           <h3 class="hover:text-primary mb-5 font-medium text-base leading-tight text-left text-clip">
-            <nuxt-link :href="`/product-details/${item.slug}`">
+            <nuxt-link :to="{ name: 'product-details-id', params: {category: item.category, slug: item.slug } }">
               {{ item.name }}
             </nuxt-link>
           </h3>
