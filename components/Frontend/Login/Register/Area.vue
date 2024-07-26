@@ -66,11 +66,12 @@
                                 <div class=" bg-white absolute -top-3 left-2 px-1 inline-block text-base text-black-title">
                                     <label for="Mobile">Mobile Number</label>
                                 </div> -->
-                                <UFormGroup label="Mobile Number" required name="mobile" class="text-start">
-                                    <UInput icon="i-heroicons-phone-arrow-down-left-solid" v-model="state.phone"  placeholder="Enter mobile number..."/>
+                                <UFormGroup label="Mobile Number" required name="phone" class="text-start mb-5">
+                                    <vueTelInput :autoFormat="false" type="number" v-on:space="filterMobileInput()"
+                                    :defaultCountry="state.country" v-model="state.phone" @validate="validate" />
                                 </UFormGroup>
                             </div>
-                            <div class=" text-gray-600 text-left my-3">
+                            <div class=" text-gray-600 text-left mb-4">
                                 OTP will be sent on email in case of non-indian mobile number.
                             </div>
 
@@ -109,23 +110,43 @@
         isValid
     } from 'date-fns'
     import type { FormError,FormErrorEvent, FormSubmitEvent } from '#ui/types'
-    
-    const date = ref(new Date())
+
     const state = reactive({
         email: undefined,
         name: undefined,
-        phone: undefined,
+        phone: '',
+        country: '',
         Newdate: new Date(),
     })
+
+    interface PhoneObject {
+        valid: boolean;
+        nationalNumber: string;
+        }
+
     const validate = (state: any): FormError[] => {
         const errors = []
         if (!state.email) {
             errors.push({ path: 'email', message: 'Required' })
         }
+        if (!state.phone) {
+            errors.push({ path: 'phone', message: 'Required' })
+        }
         if (!state.name) errors.push({ path: 'name', message: 'Required' })
         return errors
     }
     
+    function filterMobileInput() {
+                var newNumber = state.phone.replace(/\D/g, '').slice(-10);
+                state.phone = newNumber;
+            }
+
+
+    function phoneObject(object:PhoneObject) {
+        if (object.valid === false) {
+           
+        }
+    }
 
     async function onError (event: FormErrorEvent) {
     const element = document.getElementById(event.errors[0].id)
