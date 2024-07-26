@@ -60,15 +60,16 @@
                                     </UPopover>
                                 </div>
                             </div>
-                            <div class="h-10 bg-white relative my-5">
+                            <div class="h-15 bg-white relative my-5">
                                 <!-- <input id="mobile" type="text" placeholder="Enter Your Mobile Number" v-model="state.phone"
                                     class="w-full h-full px-2 border border-gray-300 rounded-md text-base text-black" />
                                 <div class=" bg-white absolute -top-3 left-2 px-1 inline-block text-base text-black-title">
                                     <label for="Mobile">Mobile Number</label>
                                 </div> -->
-                                <UFormGroup label="Mobile Number" required name="phone" class="text-start mb-5">
+                                <UFormGroup label="Mobile Number" required name="mobile_number" class="text-start mb-5">
                                     <vueTelInput :autoFormat="false" type="number" v-on:space="filterMobileInput()"
-                                    :defaultCountry="state.country" v-model="state.phone" @validate="validate" />
+                                     v-on:country-changed="countryChanged"
+                                    :defaultCountry="state.country" v-model="state.mobile_number" @validate="validatePhone" />
                                 </UFormGroup>
                             </div>
                             <div class=" text-gray-600 text-left mb-4">
@@ -114,7 +115,7 @@
     const state = reactive({
         email: undefined,
         name: undefined,
-        phone: '',
+        mobile_number: '',
         country: '',
         Newdate: new Date(),
     })
@@ -129,24 +130,30 @@
         if (!state.email) {
             errors.push({ path: 'email', message: 'Required' })
         }
-        if (!state.phone) {
-            errors.push({ path: 'phone', message: 'Required' })
+        if (!isNumberValid.value) {
+            errors.push({ path: 'mobile_number', message: 'Correct Number Required' });
         }
         if (!state.name) errors.push({ path: 'name', message: 'Required' })
         return errors
     }
-    
+    const isNumberValid = ref(false);
     function filterMobileInput() {
-                var newNumber = state.phone.replace(/\D/g, '').slice(-10);
-                state.phone = newNumber;
+                var newNumber = state.mobile_number.replace(/\D/g, '').slice(-10);
+                state.mobile_number = newNumber;
             }
 
 
-    function phoneObject(object:PhoneObject) {
-        if (object.valid === false) {
-           
+    function validatePhone(object:PhoneObject) {
+        if (object.valid === true) {
+            isNumberValid.value = true;
         }
     }
+
+    function countryChanged(country:any) {
+                state.country = country.dialCode
+                // this.form.country_iso = country.iso2
+                // this.form.country_name = country.name
+            }
 
     async function onError (event: FormErrorEvent) {
     const element = document.getElementById(event.errors[0].id)
@@ -157,13 +164,7 @@
     function formatDate(date:Date): String {
         return format(date, 'yyyy-MM-dd');
     }
-    // const HOMEPAGE_API = ;
-    // async function submitform () {
-    //     const response = $fetch(config.public.appUrl+"/api/register",{
-    //         method: "POST",
-            
-    //     })
-    // }
+
         const config = useRuntimeConfig();
         const submitForm = async () => {
             try{
@@ -173,12 +174,11 @@
                 body: {
                     name: state.name,
                     email: state.email,
-                    country: "91",
+                    country: state.country,
                     date_of_birth: formattedDate,
-                    phone: state.phone
+                    mobile_number: state.mobile_number
                 }
             })
-            console.log('hello sir it worked')
             console.log(data.value)
         }
         catch(error){
