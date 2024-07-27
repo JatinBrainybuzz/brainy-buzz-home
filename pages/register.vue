@@ -1,14 +1,15 @@
 <template>
     <div>
         <!-- <FrontendLoginBreadcrumb title="Register Now" subtitle="Register" :center="true" /> -->
-        <FrontendLoginRegisterArea />
+        <!-- <FrontendLoginRegisterArea /> -->
+        <FrontendLoginRegisterNextStep />
     </div>
   </template>
   
   <script setup >
-  definePageMeta({
-  layout: false 
-})
-  useSeoMeta({ title: "Register Page" });
+  const valid = ref(false)
+  function registered(){
+    valid.value = true
+  }
   </script>
   

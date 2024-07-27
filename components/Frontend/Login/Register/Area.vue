@@ -166,25 +166,26 @@
     }
 
         const config = useRuntimeConfig();
-        const submitForm = async () => {
-            try{
-                const formattedDate = formatDate(state.Newdate);
-            const data:any = await $fetch(config.public.appUrl+"api/register", {
-                method: 'post',
-                body: {
-                    name: state.name,
-                    email: state.email,
-                    country: state.country,
-                    date_of_birth: formattedDate,
-                    mobile_number: state.mobile_number
-                }
-            })
-            console.log(data.value)
+    const submitForm = () => {
+        const formattedDate = formatDate(state.Newdate);
+        const data:any = $fetch(config.public.appUrl+"api/register", {
+            method: 'post',
+            body: {
+                name: state.name,
+                email: state.email,
+                country: state.country,
+                date_of_birth: formattedDate,
+                mobile_number: state.mobile_number
+            }
+        }).then((data: any) => {
+        if (data.type === 'success') {
+            
         }
-        catch(error){
-            console.error('when submitting form got error: ', error)
-        }
-        }
+    }).catch((error: any) => {
+        console.error('when submitting form got error: ', error);
+    });
+    
+    }
     // const {  data: items } = await useLazyFetch(HOMEPAGE_API);
 
     async function onSubmit (event: FormSubmitEvent<any>) {
