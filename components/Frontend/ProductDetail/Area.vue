@@ -14,7 +14,7 @@
           <!-- col end -->
           <div>
             <!-- product details wrapper -->
-            <LazyFrontendProductDetailWrapper :productDetail="productDetail" />
+            <LazyFrontendProductDetailWrapper :productDetail="productDetail" :currency="currency" />
             <!-- <product-details-wrapper :product="product" /> -->
             <!-- product details wrapper -->
           </div>
@@ -47,5 +47,8 @@
   } = await useLazyFetch(ProductDetailsAPI);
   const productDetail = computed(() => {
     return items ?.value ?.product;
+  });
+  const currency = computed(() => {
+    return items ?.value ?.currency;
   });
 </script>
