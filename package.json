@@ -14,7 +14,7 @@
     "@samk-dev/nuxt-vcalendar": "^1.0.3",
     "date-fns": "^2.30.0",
     "nuxt": "^3.11.2",
-    "swiper": "^11.1.1",
+    "swiper": "^11.1.8",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
     "vue-timer-hook": "^1.0.84",

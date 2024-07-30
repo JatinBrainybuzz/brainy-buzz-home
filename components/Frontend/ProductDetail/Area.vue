@@ -8,7 +8,7 @@
             <!-- <product-details-thumb
                 :product="product"
               /> -->
-            <FrontendProductDetailThumb />
+            <FrontendProductDetailThumb  :productImages="productImages"/>
             <!-- product details thumb end -->
           </div>
           <!-- col end -->
@@ -50,5 +50,8 @@
   });
   const currency = computed(() => {
     return items ?.value ?.currency;
+  });
+  const productImages = computed(() => {
+    return items ?.value ?.product?.productImages;
   });
 </script>
