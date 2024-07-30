@@ -148,6 +148,7 @@
             isNumberValid.value = true;
         }
     }
+    const emit = defineEmits(['formSubmitted'])
 
     function countryChanged(country:any) {
                 state.country = country.dialCode
@@ -160,7 +161,7 @@
     element?.focus()
     element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
-
+    
     function formatDate(date:Date): String {
         return format(date, 'yyyy-MM-dd');
     }
@@ -178,8 +179,12 @@
                 mobile_number: state.mobile_number
             }
         }).then((data: any) => {
-        if (data.type === 'success') {
+            console.log(data);
+        if (data.msg91 === 'success') {
             
+            emit('formSubmitted',state)
+        } else{
+            console.error('SOmething went wrong: ', data)
         }
     }).catch((error: any) => {
         console.error('when submitting form got error: ', error);

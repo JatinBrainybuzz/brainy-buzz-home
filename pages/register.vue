@@ -1,8 +1,8 @@
 <template>
     <div>
         <!-- <FrontendLoginBreadcrumb title="Register Now" subtitle="Register" :center="true" /> -->
-        <!-- <FrontendLoginRegisterArea /> -->
-        <FrontendLoginRegisterNextStep />
+        <FrontendLoginRegisterArea v-if="!valid" @formSubmitted="registered"/>
+        <FrontendLoginRegisterNextStep v-if="valid" />
     </div>
   </template>
   

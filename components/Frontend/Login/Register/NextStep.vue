@@ -62,7 +62,14 @@
 </template>
 <script setup>
 const OTP = ref('')
-function submitForm(){
-    console.log('hi something')
+const config = useRuntimeConfig();
+const submitForm = () => {
+        const data = $fetch(config.public.appUrl+"api/register", {
+            method: 'post',
+            body: {
+                OTP: .name,
+            }
+        }
+    )
 }
 </script>
