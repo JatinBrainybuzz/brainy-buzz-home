@@ -243,6 +243,7 @@
             console.log(data);
         if (data.msg91 === 'success') {
             isAllowed.value = false;
+            localStorage.setItem('token',JSON.stringify(data.user_creation.token) )
         } else{
             console.error('SOmething went wrong: ', data)
         }
@@ -262,9 +263,17 @@
 
     // Submit the OTP 
     const submitOtp = () => {
+        const formattedDate = formatDate(state.Newdate);
         const data:any = $fetch(config.public.appUrl+"/api/verify-otp", {
             method: 'post',
-            body: state
+            body: {
+                otp: state.otp,
+                name: state.name,
+                email: state.email,
+                country: state.country,
+                date_of_birth: formattedDate,
+                mobile_number: state.mobile_number
+            }
         }).then((res :any) =>{
             if (res.data.type == "success") {
                 localStorage.setItem('customerData', JSON.stringify(res.data.user))
