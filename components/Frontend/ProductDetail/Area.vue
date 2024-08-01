@@ -41,10 +41,10 @@
 <script setup>
   const config = useRuntimeConfig();
   const ProductDetailsAPI = config.public.appUrl+"/api/product/get-product-details?slug="+window.location.pathname.split("/").pop()+"&activity=clicked_products";
-
   const {
     data: items
-  } = await useLazyFetch(ProductDetailsAPI);
+  } = useLazyFetch(ProductDetailsAPI);
+  console.log('this is data: ' + items)
   const productDetail = computed(() => {
     return items ?.value ?.product;
   });

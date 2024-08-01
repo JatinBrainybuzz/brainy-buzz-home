@@ -5,7 +5,8 @@
         </UCarousel>
         
         <FrontendTheme1FeatureArea />
-        <FrontendProductNewArrival :new_arrival="new_arrival"/>
+        <FrontendProductNewArrival :products="new_arrival" heading="New Arrival"/>
+        <FrontendProductNewArrival :products="trending" heading="Trending"/>
         <!-- <HomepageCategoryCard :parent_category = "parent_categories"/> -->
     </section>
 </template>
@@ -29,6 +30,9 @@ const arr = computed(() => {
 
 const new_arrival = computed(() => {
   return items?.value?.data?.product?.new_arrival;
+});
+const trending = computed(() => {
+  return items?.value?.data?.product?.trending;
 });
 </script>
 
