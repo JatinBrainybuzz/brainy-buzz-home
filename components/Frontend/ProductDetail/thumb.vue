@@ -72,7 +72,7 @@ const modules = [FreeMode, Navigation, Thumbs]
 // const HOMEPAGE_API = config.public.appUrl+"/api/home/get-all-homepage-data?order_id=9&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&domain=localhost&url=localhost&activity=visited_website";
 // const {  data: formdata } = await useLazyFetch(HOMEPAGE_API);
 
-console.log(formdata.value)
+// console.log(formdata.value)
 
 
 const setThumbsSwiper = (swiper) => {
