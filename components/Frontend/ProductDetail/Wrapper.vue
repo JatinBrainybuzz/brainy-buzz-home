@@ -1,7 +1,6 @@
 <template>
   <div class=" ml-5 sticky top-[120px]">
     <div class="tp-product-details-category text-base mb-2 leading-4">
-      <!-- <span>{{product.parent}}</span> -->
       <span class="hover:text-primary"> Category name </span>
     </div>
     <h3 class=" text-2xl md:text-3xl font-medium leading-4 mb-4">
@@ -10,7 +9,6 @@
     <!-- inventory details -->
     <div class="tp-product-details-inventory flex items-center mb-4">
       <div class=" mr-3 mb-4 text-white bg-blue-500">
-        <!-- <span>{{product.status}}</span> -->
         <span class="mr-3 inline-block text-base px-1 py-3">In stock</span>
       </div>
       <div class="tp-product-details-rating-wrapper flex items-center mb-4">
@@ -33,22 +31,28 @@
         </div>
       </div>
     </div>
-    <p class="text-left" >
+    <p class="text-left">
       <div v-html="productDetail?.description">
       </div>
       <span @click="textMore = !textMore">
-      </span></p>
+      </span>
+    </p>
 
     <!-- price -->
     <div class="tp-product-details-price-wrapper mb-5">
       <div class=" font-medium text-2xl tracking-tight">
         <!-- v-if="product.discount > 0" -->
-        <span class=" font-normal text-base line-through text-gray-600 old-price"  v-if="productDetail?.original_price">{{ currency ? (currency?.symbol ? currency?.symbol : currency.code) : '₹' }} {{ productDetail?.original_price }}
+        <span class=" font-normal text-base line-through text-gray-600 old-price"
+          v-if="productDetail?.original_price">{{ currency ? (currency?.symbol ? currency?.symbol : currency.code) : '₹' }}
+          {{ productDetail?.original_price }}
         </span>
-        <span class=" font-normal text-base line-through text-gray-600 old-price"  v-else>{{ currency ? (currency?.symbol ? currency?.symbol : currency?.code) : '₹' }} {{ productDetail?.price }}
+        <span class=" font-normal text-base line-through text-gray-600 old-price"
+          v-else>{{ currency ? (currency?.symbol ? currency?.symbol : currency?.code) : '₹' }}
+          {{ productDetail?.price }} 
         </span>
         <span class="tp-product-details-price ml-2 text-black new-price">
-          {{ currency ? (currency?.symbol ? currency?.symbol : currency.code) : '₹' }} {{ productDetail?.price }}
+          {{ currency ? (currency?.symbol ? currency?.symbol : currency.code) : '₹' }} {{ productDetail?.price }} {{ nuxtApp.$getPercent(productDetail?.original_price, productDetail?.price) }}%
+          Off
         </span>
       </div>
     </div>
@@ -71,19 +75,7 @@
           <span class="">
             white
           </span>
-          <!-- <button
-            v-for="(item, i) in product.imageURLs"
-            :key="i"
-            @click="productStore.handleImageActive(item.img)"
-            type="button"
-            :class="['color', 'tp-color-variation-btn', item.img === productStore.activeImg ? 'active' : '']"
-            style="margin-right:5px"
-          >
-            <span :data-bg-color="item.color?.clrCode" :style="`background-color:${item.color?.clrCode}`"></span>
-            <span v-if="item.color && item.color.name" class="tp-color-variation-tootltip">
-              {{ item.color.name }}
-            </span>
-          </button> -->
+      
         </div>
       </div>
     </div>
@@ -147,7 +139,7 @@
         <div class="tp-product-details-query-item flex items-center gap-2">
           <span>SKU: </span>
           <p class="text-gray-600">
-            {{productDetail?.sku}} 
+            {{productDetail?.sku}}
           </p>
         </div>
         <div class="tp-product-details-query-item flex items-center gap-2">
@@ -198,5 +190,7 @@
 <script setup>
   const textMore = true
   const quantity = ref(0)
-  const props = defineProps(['productDetail','currency'])
+  const props = defineProps(['productDetail', 'currency'])
+  const nuxtApp = useNuxtApp();
+  // const { $getPercent } = useNuxtApp();
 </script>

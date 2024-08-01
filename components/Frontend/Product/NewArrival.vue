@@ -5,7 +5,7 @@
         <div class="xl:col-span-5 sm:col-span-6">
           <div class="text-sm ">
             <h3 class="relative text-4xl z-[1] text-black">
-              New Arrivals
+              {{heading}}
               <FrontendProductSvgSectionLine />
             </h3>
           </div>
@@ -16,10 +16,7 @@
             :pagination="{
               clickable: true,
             }" 
-              :autoplay="{
-                delay: 2500,
-                disableOnInteraction: true,
-              }"
+              :autoplay="Auto"
               :breakpoints="{
                 '1200': {
                   slidesPerView: 4,
@@ -37,7 +34,7 @@
                   slidesPerView: 1,
                 },
               }" :modules="modules" class="tp-product-arrival-active swiper-container">
-          <SwiperSlide v-for="(item, i) in new_arrival" :key="i">
+          <SwiperSlide v-for="(item, i) in products" :key="i">
             <FrontendTheme1Card :item="item" />
           </SwiperSlide>
         </Swiper>
@@ -66,10 +63,17 @@
     Pagination,
   } from "swiper/modules";
   // import GridLayout from 'vue3-grid-layout-next';
-  const modules = [Autoplay, Pagination]
   const props = defineProps({
-    new_arrival: Array
+    products: Array,
+    heading: String,
+    autoplay: Boolean
   })
+  const modules = props.autoplay ? [Autoplay, Pagination] : [Pagination]
+  
+  const Auto = props.autoplay ? {
+                delay: 2500,
+                disableOnInteraction: true,
+              } : false
 
   const data = {
       layout: [{
