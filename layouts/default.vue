@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col h-screen justify-between text-center no-scrollbar">
-        <div>
+        <div class="bg-red">
             <PromotionalBar />
             <FrontendHeaderTheHeader />
         </div>
