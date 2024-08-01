@@ -1,5 +1,6 @@
 <template>
     <div class="flex justify-center lg:m-20 md:m-12 sm:m-5 m-2">
+        <FrontendLoader v-if="loader" />
         <div class="xl:w-1/3 xl:h-1/2 lg:w-1/2 lg:h-1/2 sm:w-[80%] w-[90%] shadow-lg text-center">
             <div class="heading flex gap-5 justify-center mt-7">
                 <div class=" w-40">
@@ -92,6 +93,7 @@ const form = reactive({
 
 })
 
+const loader = ref(false);
 const config = useRuntimeConfig();
 const disableMobileInput = false
 const isDisabled = ref(true);
@@ -125,12 +127,14 @@ const sendOtp = async () =>{
     const variefy = await v$.value.$validate();
     if(variefy){
         try {
+            loader.value = true;
         const data = await $fetch(config.public.appUrl+"/api/send-otp", {
             method: 'post',
             body: form
         })
         console.log(data);
         if (data.type == "user_not_found") {
+            loader.value = false;
                 localStorage.setItem('new_registration_number', form.mobile_number);
                 localStorage.setItem('new_country_code', form.country);
                 $router.push({
@@ -140,6 +144,7 @@ const sendOtp = async () =>{
         if (data.type == "success") {
                 // disableMobileInput = true;
                 isDisabled.value = false;
+                loader.value = false;
                 // $toast({
                 //     component: ToastificationContent,
                 //     props: {
@@ -152,7 +157,8 @@ const sendOtp = async () =>{
             } 
             
         else if (data.type == "error") {
-                isDisabled = false;
+                isDisabled.value = false;
+                loader.value = false;
                 // $toast({
                 //     component: ToastificationContent,
                 //     props: {
@@ -164,6 +170,7 @@ const sendOtp = async () =>{
             }
         }
         catch (error) {
+            loader.value = false;
             console.error("Error sending OTP:", error);
         }
     }
@@ -177,12 +184,14 @@ const varifyOtp = async () => {
     const variefy = await vv$.value.$validate();
     if(variefy){
         try {
+            loader.value = true;
         const data = await $fetch(config.public.appUrl+"/api/login", {
             method: 'post',
             body: form
         })
             if (data.type == "error") {
                 console.log('error')
+                loader.value = false
                 // this.signInDisabled = false;
                 // this.notification(data.message, data.variant);
                 // this.$toast({
@@ -218,13 +227,16 @@ const varifyOtp = async () => {
                 // console.log(data);
                 // return false;
                 if(data.is_android_app == 'true') { 
+                    loader.value = false
                     window.location.href = window.location.origin+'/mobile-app-homepage/'+data.token;
                     // this.$router.push({
                     //     name: 'home-mobile-app',
                     //     params: {slug :data.token}
                     // })
                 } else {
+                    
                     const lastRouteName = localStorage.getItem('lastUrl');
+                    loader.value = false
                     $router.push({
                         name: lastRouteName ? lastRouteName : 'home'
                     }).catch((e) => {
@@ -235,10 +247,12 @@ const varifyOtp = async () => {
 
 
         }else{
+            loader.value = false
             console.log('error in something')
         }
         }
         catch (error){
+            loader.value = false
             console.log('error: ', error)
         }
     }
