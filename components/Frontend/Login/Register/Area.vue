@@ -136,40 +136,28 @@
     function formatDate(date:Date): String {
         return format(date, 'yyyy-MM-dd');
     }
-    // const HOMEPAGE_API = ;
-    // async function submitform () {
-    //     const response = $fetch(config.public.appUrl+"/api/register",{
-    //         method: "POST",
-            
-    //     })
-    // }
+    
         const config = useRuntimeConfig();
         const submitForm = async () => {
-            try{
-                const formattedDate = formatDate(state.Newdate);
-            const data:any = await $fetch(config.public.appUrl+"api/register", {
-                method: 'post',
-                body: {
-                    name: state.name,
-                    email: state.email,
-                    country: "91",
-                    date_of_birth: formattedDate,
-                    phone: state.phone
-                }
-            })
-            console.log('hello sir it worked')
-            console.log(data.value)
+                try{
+                    const formattedDate = formatDate(state.Newdate);
+                    const data:any = await $fetch(config.public.appUrl+"/api/register", {
+                    method: 'post',
+                    body: {
+                        name: state.name,
+                        email: state.email,
+                        country: "91",
+                        date_of_birth: formattedDate,
+                        mobile_number: state.phone
+                    }
+                })
+                console.log('hello sir it worked')
+                console.log(data.value)
+            }
+            catch(error){
+                console.error('when submitting form got error: ', error)
+            }
         }
-        catch(error){
-            console.error('when submitting form got error: ', error)
-        }
-        }
-    // const {  data: items } = await useLazyFetch(HOMEPAGE_API);
-
-    async function onSubmit (event: FormSubmitEvent<any>) {
-    // Do something with data
-    console.log(event.data)
-    }
 </script>
 
 <style scoped>
