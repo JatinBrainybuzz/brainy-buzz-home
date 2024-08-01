@@ -7,11 +7,12 @@ export default defineNuxtConfig({
   build: {
     transpile: [/vue3-grid-layout-next/]
   },
+  
+  plugins: ["~/plugins/vue-tel-input",'~/plugins/helper.js'],
+
   runtimeConfig: {
     public: {
       appUrl: process.env.APP_URL ?? "http://localhost:8000"
     }
-  },
-  plugins: ['~/plugins/helper.js']
-  
+  },  
 })
