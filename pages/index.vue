@@ -16,12 +16,10 @@ const config = useRuntimeConfig();
 const HOMEPAGE_API = config.public.appUrl+"/api/home/get-all-homepage-data?order_id=9&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&domain=localhost&url=localhost&activity=visited_website";
 const {  data: items } = await useLazyFetch(HOMEPAGE_API);
 
-console.log(HOMEPAGE_API);
-const parentCategories = computed(() => {
-  return items?.value?.data?.parent_category;
-});
-// const arr = items.value.data.banner.below_category.data;
-// const new_arrival = items.value.data.product.new_arrival;
+// console.log(HOMEPAGE_API);
+// const parentCategories = computed(() => {
+//   return items?.value?.data?.parent_category;
+// });
 
 const arr = computed(() => {
   return items?.value?.data?.banner?.below_category?.data;
