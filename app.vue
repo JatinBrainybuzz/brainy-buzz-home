@@ -10,7 +10,7 @@
     </NuxtLayout>
     <!-- <UNotifications /> -->
     <div v-for="notification in $notifications" :key="notification.id">
-      <Notification :message="notification.message" :position="notification.position" :duration="notification.duration" />
+      <Notification :message="notification.message" :position="notification.position" :duration="notification.duration"  :variant="notification.variant"/>
     </div>
   </div>
 </template>

@@ -83,6 +83,8 @@ const loader = ref(false);
 const config = useRuntimeConfig();
 const isDisabled = ref(true);
 const countDown = ref(60);
+const nuxtApp = useNuxtApp()
+
 const rules = computed( () => {
     return {
     country: {required},
@@ -134,6 +136,7 @@ const sendOtp = async () =>{
         })
         console.log(data);
         if (data.type == "user_not_found") {
+            nuxtApp.$sendNotification('User Not Registered!', 'top-right', 3000, 'warning');
             loader.value = false;
                 localStorage.setItem('new_registration_number', form.mobile_number);
                 localStorage.setItem('new_country_code', form.country);
@@ -142,6 +145,7 @@ const sendOtp = async () =>{
                 })
             } 
         if (data.type == "success") {
+            nuxtApp.$sendNotification('OTP sent Successfully!', 'top-right', 3000, 'success');
                 countDown.value = 60;
                 disableMobileInput.value = true;
                 countDownTimer();
@@ -158,6 +162,7 @@ const sendOtp = async () =>{
             } 
             
         else if (data.type == "error") {
+            nuxtApp.$sendNotification('Something went Wrong. Please Try Again!', 'top-right', 3000, 'error');
                 isDisabled.value = false;
                 loader.value = false;
                 // $toast({
@@ -172,6 +177,7 @@ const sendOtp = async () =>{
         }
         catch (error) {
             loader.value = false;
+            nuxtApp.$sendNotification('Error Sending OTP. Please try again!', 'top-right', 3000, 'error');
             console.error("Error sending OTP:", error);
         }
     }
@@ -191,6 +197,7 @@ const varifyOtp = async () => {
             body: form
         })
             if (data.type == "error") {
+                nuxtApp.$sendNotification('Otp is not Matched.', 'top-right', 3000, 'error');
                 console.log('error')
                 loader.value = false
                 // this.signInDisabled = false;
@@ -214,6 +221,7 @@ const varifyOtp = async () => {
                 //         variant: 'success',
                 //     },
                 // })
+                nuxtApp.$sendNotification('Login successfully. Please Wait...', 'top-right', 3000, 'success');
                 localStorage.setItem('customerData', JSON.stringify(data.user))
                 localStorage.setItem('customerToken', (data.token))
                 localStorage.setItem('cartItemToken', (data.cartItemToken))
@@ -249,11 +257,13 @@ const varifyOtp = async () => {
 
         }else{
             loader.value = false
+            nuxtApp.$sendNotification('Something went wrong, Please Try later...', 'top-right', 3000, 'error');
             console.log('error in something')
         }
         }
         catch (error){
             loader.value = false
+            nuxtApp.$sendNotification('Something went wrong, Please Try later...', 'top-right', 3000, 'error');
             console.log('error: ', error)
         }
     }
