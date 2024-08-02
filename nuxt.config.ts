@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     transpile: [/vue3-grid-layout-next/]
   },
   
-  plugins: ["~/plugins/vue-tel-input",'~/plugins/helper.js'],
+  plugins: ["~/plugins/vue-tel-input",'~/plugins/helper.js','~/plugins/notifications.js'],
 
   runtimeConfig: {
     public: {
