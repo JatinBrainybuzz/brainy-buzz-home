@@ -24,32 +24,16 @@
                 <div class="relative mb-8">
 
                     <vueTelInput :autoFormat="false" type="number" v-on:space="filterMobileInput()"
-                                     v-on:country-changed="countryChanged" :disable="disableMobileInput"
+                                     v-on:country-changed="countryChanged"
                                     :defaultCountry="form.country" v-model="form.mobile_number" />
                                     <div v-if="v$.mobile_number.$error" class=" text-red-500 text-s text-start">
                                             <small>Mobile Number Is Required</small>
                                     </div>
-                                    <!-- <div>
-                                        this is form mobile: {{ form.mobile_number }}
-                                    </div> -->
-                                    <!-- <div v-else-if="v$.mobile_number.$error && !v$.isNumberValid.$error">
-                                            <small>Number Is Not Correct</small>
-                                        </div> -->
-
                                     
-
-
-                    <!-- <div :class="{ error: v$.otp.$errors.length }">
-                        <div class="h-12 bg-white">
-                            <input id="mobile"  v-model="form.otp" type="text" placeholder="Enter a mobile number" class=" w-full h-full px-2 border border-gray-300 rounded-md text-base text-black"  @blur="v$.otp.$touch"/>
-                        </div>
-                        <div class=" bg-white absolute -top-4 left-2 px-1 inline-block text-base text-black-title">
-                            <label for="mobile">Mobile Number</label>
-                        </div>
-                        <div v-if="v$.otp.$error">OTP field has an error.</div>
-                    </div> -->
-                    <div class="bg-primary mt-2 py-2 text-white rounded-md cursor-pointer hover:shadow-lg"  @click="sendOtp">
-                        Send OTP
+                    <div class="w-full" >
+                        <button class="bg-primary mt-2 py-2 text-white w-full rounded-md cursor-pointer disabled:bg-primary-800 hover:shadow-lg" :disabled="disableMobileInput"  @click="sendOtp">
+                            {{ btnText }}
+                        </button>
                     </div>
                     <div class=" text-gray-600 text-center mt-4">
                         OTP will be sent on email in case of non-indian mobile number.
@@ -93,11 +77,12 @@ const form = reactive({
 
 })
 
+const btnText = ref('Send OTP');
+const disableMobileInput = ref(false);
 const loader = ref(false);
 const config = useRuntimeConfig();
-const disableMobileInput = false
 const isDisabled = ref(true);
-
+const countDown = ref(60);
 const rules = computed( () => {
     return {
     country: {required},
@@ -108,6 +93,21 @@ const rules = computed( () => {
     const extraRules = {
         otp : {required}
     }
+
+
+   function countDownTimer() {
+            if (countDown.value > 0) {
+                setTimeout(() => {
+                    countDown.value -= 1
+                    countDownTimer()
+                }, 1000)
+                btnText.value = 'Resend OTP In' + ' ' + countDown.value + ' ' + 'Sec';
+                if (countDown.value == 1) {
+                    disableMobileInput.value = false;
+                    btnText.value = 'Send OTP';
+                }
+            }
+        }
 
 
 function countryChanged(country) {
@@ -142,7 +142,9 @@ const sendOtp = async () =>{
                 })
             } 
         if (data.type == "success") {
-                // disableMobileInput = true;
+                countDown.value = 60;
+                disableMobileInput.value = true;
+                countDownTimer();
                 isDisabled.value = false;
                 loader.value = false;
                 // $toast({
@@ -153,7 +155,6 @@ const sendOtp = async () =>{
                 //         variant: 'success',
                 //     },
                 // })
-
             } 
             
         else if (data.type == "error") {
