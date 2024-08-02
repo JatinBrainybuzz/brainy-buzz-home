@@ -6,7 +6,7 @@
         
         <FrontendTheme1FeatureArea />
         <FrontendProductNewArrival :products="new_arrival" heading="New Arrival"/>
-        <FrontendProductNewArrival :products="trending" heading="Trending"/>
+        <FrontendProductNewArrival :products="trending" heading="Trending" :autoplay='true'/>
         <!-- <HomepageCategoryCard :parent_category = "parent_categories"/> -->
     </section>
 </template>

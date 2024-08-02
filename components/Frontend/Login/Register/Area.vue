@@ -1,5 +1,6 @@
 <template>
     <div class="flex justify-center lg:m-20 md:m-12 sm:m-5 m-2">
+        <FrontendLoader v-if="loader"/>
         <div v-if="isAllowed" class="xl:w-1/3 xl:h-1/2 lg:w-1/2 lg:h-1/2 sm:w-[80%] w-[90%] shadow-lg text-center">
             <div class="heading flex gap-5 justify-center   ">
                 <div class=" w-40">
@@ -202,6 +203,8 @@ const state = reactive({
     Newdate: new Date(),
     otp: ''
 })
+
+const loader = ref<boolean>(false);
 
 interface PhoneObject {
     valid: boolean;
