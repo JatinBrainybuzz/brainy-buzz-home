@@ -21,6 +21,7 @@
             <div>
                 <span class="custom-message text-gray-500"> Welcome To Brainybuzz</span>
             </div>
+            <button @click="notify">Show Notification</button>
             <div class="px-4 pt-4">
                 <UForm :validate="validate" :state="state" class="space-y-4" @submit="submitForm" @error="onError">
                     <div class="relative mb-8">
@@ -128,7 +129,7 @@
 
                     </div>
                     <div class="text-center mb-5">
-                        <UButton type="submit" color="primary" variant="solid"
+                        <UButton @click="resendOtp" type="submit" color="primary" variant="solid"
                             class="hover:shadow-lg w-full text-base justify-center rounded-md cursor-pointer">
                             Resend OTP</UButton>
                     </div>
@@ -160,6 +161,37 @@ import type {
     FormErrorEvent,
     FormSubmitEvent
 } from '#ui/types'
+
+const nuxtApp = useNuxtApp();
+
+
+const notify = () => {
+    console.log(nuxtApp.$sendNotification('This is a notification!', 'top-right', 3000));
+    // nuxtApp.$sendNotification('This is a notification!', 'bottom-left', 3000);
+};
+
+const toast = useToast()
+
+onMounted(() => {
+  toast.add({
+    id: 'update_downloaded',
+    title: 'Update downloaded.',
+    description: 'It will be installed on restart. Restart now?',
+    icon: 'i-octicon-desktop-download-24',
+    timeout: 0,
+    ui: {
+        notifications: {
+        position: 'top-0 right-0'
+        }
+    },
+    actions: [{
+      label: 'Restart',
+      click: () => {
+
+      }
+    }]
+  })
+})
 
 const isAllowed = ref(true);
 
@@ -232,7 +264,7 @@ const config = useRuntimeConfig();
 
 const submitForm = () => {
     const formattedDate = formatDate(state.Newdate);
-    const data: any = $fetch(config.public.appUrl + "api/register", {
+    const data: any = $fetch(config.public.appUrl + "/api/register", {
         method: 'post',
         body: {
             name: state.name,
@@ -242,7 +274,25 @@ const submitForm = () => {
             mobile_number: state.mobile_number
         }
     }).then((data: any) => {
-        console.log(data);
+        if (data.msg91 === 'success') {
+            isAllowed.value = false;
+            localStorage.setItem('token', JSON.stringify(data.user_creation.token))
+        } else {
+            console.error('SOmething went wrong: ', data)
+        }
+    }).catch((error: any) => {
+        console.error('when submitting form got error: ', error);
+    });
+
+}
+
+const resendOtp = () => {
+    const data: any = $fetch(config.public.appUrl + "/api/send-otp", {
+        method: 'post',                                                                                                                                                                                                                     
+        body: {
+            mobile_number: state.mobile_number
+        }
+    }).then((data: any) => {
         if (data.msg91 === 'success') {
             isAllowed.value = false;
             localStorage.setItem('token', JSON.stringify(data.user_creation.token))
@@ -270,10 +320,10 @@ const submitOtp = () => {
             date_of_birth: formattedDate,
             mobile_number: state.mobile_number
         }
-    }).then((res: any) => {
-        if (res.data.type == "success") {
-            localStorage.setItem('customerData', JSON.stringify(res.data.user))
-            localStorage.setItem('customerToken', (res.data.token))
+    }).then((data: any) => {
+        if (data.type == "success") {
+            localStorage.setItem('customerData', JSON.stringify(data.user))
+            localStorage.setItem('customerToken', (data.token))
             const guestCartItemToken = localStorage.getItem('is_guest_token')
             if (guestCartItemToken) {
                 router.push({
@@ -281,8 +331,8 @@ const submitOtp = () => {
                 }).catch((e: any) => {
                     console.log(e);
                 });
-            } else if (res.data.is_android_app == 'true') {
-                window.location.href = window.location.origin + '/mobile-app-homepage/' + res.data.token;
+            } else if (data.is_android_app == 'true') {
+                window.location.href = window.location.origin + '/mobile-app-homepage/' + data.token;
             } else {
                 router.push({
                     name: 'home'
