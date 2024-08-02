@@ -44,11 +44,18 @@
       <div class="tab-pane transition-1 block " v-if="activeTab === 1">
         <div class=" pt-14 sm:overflow-auto">
           <div class="grid grid-cols-1">
-              <div class="product-color-options" v-if="productDetail.productType == 'simple'" v-for="(attribute, attributeName)  in attributes" :key="attribute.id">
-                  <h6 class="font-weight-bolder">{{ attributeName }}</h6>
-                  <p>{{ attribute }}</p>
-              </div>
-            <!-- <UTable :rows="people" /> -->
+            <table class="min-w-full divide-y divide-gray-200" v-if="productDetail?.productType == 'simple'">
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr  v-for="(attribute, attributeName)  in attributes" :key="attribute.id">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {{ attributeName }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ attribute }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -160,47 +167,8 @@
 
 <script setup>
   const activeTab = ref(0)
-
   function handleTabClick(index) {
     activeTab.value = index
   }
-  const people = [{
-    id: 1,
-    name: 'Lindsay Walton',
-    title: 'Front-end Developer',
-    email: 'lindsay.walton@example.com',
-    role: 'Member'
-  }, {
-    id: 2,
-    name: 'Courtney Henry',
-    title: 'Designer',
-    email: 'courtney.henry@example.com',
-    role: 'Admin'
-  }, {
-    id: 3,
-    name: 'Tom Cook',
-    title: 'Director of Product',
-    email: 'tom.cook@example.com',
-    role: 'Member'
-  }, {
-    id: 4,
-    name: 'Whitney Francis',
-    title: 'Copywriter',
-    email: 'whitney.francis@example.com',
-    role: 'Admin'
-  }, {
-    id: 5,
-    name: 'Leonard Krasner',
-    title: 'Senior Designer',
-    email: 'leonard.krasner@example.com',
-    role: 'Owner'
-  }, {
-    id: 6,
-    name: 'Floyd Miles',
-    title: 'Principal Designer',
-    email: 'floyd.miles@example.com',
-    role: 'Member'
-  }]
-
   const props = defineProps(['productDetail', 'attributes'])
 </script>
