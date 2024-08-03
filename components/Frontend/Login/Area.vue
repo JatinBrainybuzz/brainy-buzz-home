@@ -1,63 +1,65 @@
 <template>
-    <div class="flex justify-center lg:m-20 md:m-12 sm:m-5 m-2">
+    <div>
         <FrontendLoader v-if="loader" />
-        <div class="xl:w-1/3 xl:h-1/2 lg:w-1/2 lg:h-1/2 sm:w-[80%] w-[90%] shadow-lg text-center">
-            <div class="heading flex gap-5 justify-center mt-7">
-                <div class=" w-40">
-                    <img src="/brainybuzzlong.png" alt="">
+        <div class="flex justify-center lg:p-20 md:p-12 sm:p-5 p-2">
+            <div class="xl:w-1/3 xl:h-1/2 lg:w-1/2 lg:h-1/2 sm:w-[80%] w-[90%] shadow-lg text-center">
+                <div class="heading flex gap-5 justify-center mt-7">
+                    <div class=" w-40">
+                        <img src="/brainybuzzlong.png" alt="">
+                    </div>
+                    <div>
+                        <NuxtLink :to="{name: 'home'}" class=" text-2xl group font-medium text-primary" >
+                            BrainyBuzz
+                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
+                        </NuxtLink>
+                    </div>
+                </div>
+
+                <div class="py-2">
+                    <span class="text-xl"> Welcome 👋</span>
                 </div>
                 <div>
-                    <NuxtLink :to="{name: 'home'}" class=" text-2xl group font-medium text-primary" >
-                        BrainyBuzz
-                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
-                    </NuxtLink>
+                    <span class="custom-message text-gray-500"> Welcome To Brainybuzz</span>
                 </div>
-            </div>
+                <div class="px-4 pt-4">
+                    <div class="relative mb-8">
 
-            <div class="py-2">
-                <span class="text-xl"> Welcome 👋</span>
-            </div>
-            <div>
-                <span class="custom-message text-gray-500"> Welcome To Brainybuzz</span>
-            </div>
-            <div class="px-4 pt-4">
-                <div class="relative mb-8">
-
-                    <vueTelInput :autoFormat="false" type="number" v-on:space="filterMobileInput()"
-                                     v-on:country-changed="countryChanged"
-                                    :defaultCountry="form.country" v-model="form.mobile_number" />
-                                    <div v-if="v$.mobile_number.$error" class=" text-red-500 text-s text-start">
-                                            <small>Mobile Number Is Required</small>
-                                    </div>
-                                    
-                    <div class="w-full" >
-                        <button class="bg-primary mt-2 py-2 text-white w-full rounded-md cursor-pointer disabled:bg-primary-800 hover:shadow-lg" :disabled="disableMobileInput"  @click="sendOtp">
-                            {{ btnText }}
-                        </button>
-                    </div>
-                    <div class=" text-gray-600 text-center mt-4">
-                        OTP will be sent on email in case of non-indian mobile number.
-                    </div>
-                    <div class="my-1 text-left font-normal text-gray-500">
-                        OTP
-                    </div>
-                    <div class="h-10 bg-white mb-4">
-                        <input id="otp" type="text" v-model="form.otp" placeholder="5472" class=" w-full h-full px-2 border rounded-md border-gray-300 text-base text-black" />
-                        <div v-if="vv$.otp.$error" class=" text-red-500 text-s text-start">
-                                            <small>OTP Is Required</small>
-                                    </div>
-                    </div>
-                    <div class="w-full">
-                        <button :disabled='isDisabled' class="text-white bg-primary disabled:bg-primary-800 w-full hover:shadow-lg mt-2 py-2 rounded-md cursor-pointer" @click="varifyOtp">
-                            Sign In
-                        </button>
-                    </div>
-                    <div class=" font-extralight flex gap-2 mt-4 justify-center text-gray-500">
-                        <span>New on Our Platform?</span>
-                        <div>
-                            <NuxtLink :to="{name: 'register'}" class="text-primary group">Create an Account
-                            <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
-                            </NuxtLink>
+                        <vueTelInput :autoFormat="false" type="number" v-on:space="filterMobileInput()"
+                                        v-on:country-changed="countryChanged"
+                                        :defaultCountry="form.country" v-model="form.mobile_number" />
+                                        <div v-if="v$.mobile_number.$error" class=" text-red-500 text-s text-start">
+                                                <small>Mobile Number Is Required</small>
+                                        </div>
+                                        
+                        <div class="w-full" >
+                            <button class="bg-primary mt-2 py-2 text-white w-full rounded-md cursor-pointer disabled:bg-primary-800 hover:shadow-lg" :disabled="disableMobileInput"  @click="sendOtp">
+                                {{ btnText }}
+                            </button>
+                        </div>
+                        <div class=" text-gray-600 text-center mt-4">
+                            OTP will be sent on email in case of non-indian mobile number.
+                        </div>
+                        <div class="my-1 text-left font-normal text-gray-500">
+                            OTP
+                        </div>
+                        <div class="h-10 bg-white mb-4">
+                            <input id="otp" type="text" v-model="form.otp" placeholder="5472" class=" w-full h-full px-2 border rounded-md border-gray-300 text-base text-black" />
+                            <div v-if="vv$.otp.$error" class=" text-red-500 text-s text-start">
+                                                <small>OTP Is Required</small>
+                                        </div>
+                        </div>
+                        <div class="w-full">
+                            <button :disabled='isDisabled' class="text-white bg-primary disabled:bg-primary-800 w-full hover:shadow-lg mt-2 py-2 rounded-md cursor-pointer" @click="varifyOtp">
+                                Sign In
+                            </button>
+                        </div>
+                        <div class=" font-extralight flex gap-2 mt-4 justify-center text-gray-500">
+                            <span>New on Our Platform?</span>
+                            <div>
+                                <NuxtLink :to="{name: 'register'}" class="text-primary group">Create an Account
+                                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-primary-600"></span>
+                                </NuxtLink>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,7 +70,7 @@
 
 <script setup>
 import { useVuelidate } from '@vuelidate/core'
-import { required, minLength, maxLength} from '@vuelidate/validators'
+import { required} from '@vuelidate/validators'
 
 const form = reactive({
     otp: '',
@@ -127,6 +129,7 @@ const $router = useRouter();
 
 const sendOtp = async () =>{
     const variefy = await v$.value.$validate();
+   
     if(variefy){
         try {
             loader.value = true;

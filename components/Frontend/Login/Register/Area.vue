@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div >
         <FrontendLoader v-if="loader"/>
-    <div class="flex justify-center lg:m-20 md:m-12 sm:m-5 m-2">
+    <div class="flex justify-center lg:p-20 md:p-12 sm:p-5 p-2">
         <div v-if="isAllowed" class="xl:w-1/3 xl:h-1/2 lg:w-1/2 lg:h-1/2 sm:w-[80%] w-[90%] shadow-lg text-center">
             <div class="heading flex gap-5 justify-center   ">
                 <div class=" w-40">
@@ -112,10 +112,12 @@
                         <input id="mobile" type="text" placeholder="Please Enter Your OTP" aria-required="true"
                             v-model="state.otp"
                             class=" w-full group h-full px-2 border border-gray-300 rounded-md text-base text-black" />
-                        <div
-                            class=" bg-white group-hover:-top-9 absolute -top-4 left-2 px-1 inline-block text-base text-black-title">
+                        <div class=" bg-white group-hover:-top-9 absolute -top-4 left-2 px-1 inline-block text-base text-black-title">
                             <label for="Mobile">Please Enter your OTP</label>
                         </div>
+                        <div v-if="v$.otp.$error" class="text-red-500 text-s text-start">
+                                        <small>OTP is Required</small>
+                                    </div>
                     </div>
 
                     <div class="w-full">
@@ -154,7 +156,7 @@
     </div>
     </div>
 </template>
-<script setup lang = "ts" >
+<script setup lang = "ts">
         import {
             format,
             isValid
@@ -164,6 +166,8 @@
         FormErrorEvent,
         FormSubmitEvent
     } from '#ui/types'
+import { required } from '@vuelidate/validators';
+import useVuelidate from '@vuelidate/core';
 
     const nuxtApp:any = useNuxtApp();
     const countDown = ref<number>(60);
@@ -205,6 +209,7 @@
     //     })
     // })
 
+   
     interface PhoneObject {
         valid: boolean;
         nationalNumber: string;
@@ -230,7 +235,6 @@
         })
         return errors
     }
-
 
     function filterMobileInput() {
         var newNumber = state.mobile_number.replace(/\D/g, '').slice(-10);
@@ -274,6 +278,10 @@
         }
     }
 
+    const rules = {
+        otp:{required}
+    }
+    const v$ = useVuelidate(rules, state);
 
 
     const submitForm = () => {
@@ -316,7 +324,7 @@
             if (data.type === 'success') {
                 loader.value = false;
                 countDown.value = 60;
-                nuxtApp.$sendNotification('OTP Send Successfully...', 'top-right', 3000, 'success');
+                nuxtApp.$sendNotification('OTP Send Successfully...', 'top-right', 4000, 'success');
                 resendDisabled.value = true;
                 countDownTimer();
                 isAllowed.value = false;
@@ -335,20 +343,23 @@
 
 
     // Submit the OTP 
-    const submitOtp = () => {
-        loader.value = true;
-        const formattedDate = formatDate(state.Newdate);
-        const data: any = $fetch(config.public.appUrl + "/api/verify-otp", {
-            method: 'post',
-            body: {
-                otp: state.otp,
-                name: state.name,
-                email: state.email,
-                country: state.country,
-                date_of_birth: formattedDate,
-                mobile_number: state.mobile_number
-            }
-        }).then((data: any) => {
+    const submitOtp = async () => {
+        const variefy = await v$.value.$validate();
+    
+        if(variefy){
+            loader.value = true;
+            const formattedDate = formatDate(state.Newdate);
+            const data:any = await $fetch(config.public.appUrl + "/api/verify-otp", {
+                method: 'post',
+                body: {
+                    otp: state.otp,
+                    name: state.name,
+                    email: state.email,
+                    country: state.country,
+                    date_of_birth: formattedDate,
+                    mobile_number: state.mobile_number
+                }
+            })
             if (data.type == "success") {
                 loader.value = false;
                 nuxtApp.$sendNotification('User Login Successfully...', 'top-right', 3000, 'success');
@@ -361,22 +372,27 @@
                 //     }).catch((e: any) => {
                 //         console.log(e);
                 //     });
-            // }
-                 if (data.is_android_app == 'true') {
-                    window.location.href = window.location.origin + '/mobile-app-homepage/' + data.token;
-                } else {
+                // }
+                //  if (data.is_android_app == 'true') {
+                    // window.location.href = window.location.origin + '/mobile-app-homepage/' + data.token;
+                // }
+                //  else {
                     router.push({
                         name: 'home'
-                    }).catch((e: any) => {
-                        console.log(e);
-                    });
-                }
+                    })
+                    // .catch((e: any) => {
+                    //     console.log(e);
+                    // });
+                // }
+            }else{
+                loader.value = false;
+                nuxtApp.$sendNotification('OTP is wrong! Please Try Again', 'top-right', 3000, 'error');
+                console.error('when submitting form got error');
             }
-        }).catch((error: any) => {
-            loader.value = false;
-            nuxtApp.$sendNotification('OTP is wrong! Please Try Again', 'top-right', 3000, 'error');
-            console.error('when submitting form got error: ', error);
-        });
+        }
+        else{
+            return;
+        }
     }
 
 </script>
