@@ -5,9 +5,24 @@
     </div>
     <h3 class=" text-2xl md:text-3xl font-medium leading-4 mb-4">
       {{ productDetail?.name }}</h3>
+    <div v-if="productDetail?.productType == 'configurable'">
+      <div v-for="(attribute, attributeName) in productDetail?.attributes" :key="attribute.id">
+        <p class="mt-2">{{ attributeName }}</p>
+        <div class="flex space-x-4">
+          <swiper class="swiper-responsive-breakpoints configurable-card-swiper mb-1">
+              <swiper-slide v-for="attributeValue in attribute"
+                  :key="attribute.id" class="border mt-50">
+                  <div class="w-24 h-12 bg-white border border-gray-300 flex items-center justify-center text-gray-700">
+                    {{ attributeValue?.text }}
+                  </div>
+              </swiper-slide>
+          </swiper>
+        </div>
+      </div>
+    </div>
 
     <!-- inventory details -->
-    <div class="tp-product-details-inventory flex items-center mb-4">
+    <!-- <div class="tp-product-details-inventory flex items-center mb-4">
       <div class=" mr-3 mb-4 text-white bg-blue-500">
         <span class="mr-3 inline-block text-base px-1 py-3">In stock</span>
       </div>
@@ -25,13 +40,11 @@
             <Icon name="material-symbols:star" /></span>
         </div>
         <div class="tp-product-details-reviews">
-          <span>(
-            <!-- {{product.reviews?.length}} -->
-            4 Reviews)</span>
+          <span>(4 Reviews)</span>
         </div>
       </div>
-    </div>
-    <p class="text-left">
+    </div> -->
+    <p class="text-left mt-2">
       <div v-html="productDetail?.description">
       </div>
       <span @click="textMore = !textMore">
@@ -48,10 +61,11 @@
         </span>
         <span class=" font-normal text-base line-through text-gray-600 old-price"
           v-else>{{ currency ? (currency?.symbol ? currency?.symbol : currency?.code) : '₹' }}
-          {{ productDetail?.price }} 
+          {{ productDetail?.price }}
         </span>
         <span class="tp-product-details-price ml-2 text-black new-price">
-          {{ currency ? (currency?.symbol ? currency?.symbol : currency.code) : '₹' }} {{ productDetail?.price }} {{ nuxtApp.$getPercent(productDetail?.original_price, productDetail?.price) }}%
+          {{ currency ? (currency?.symbol ? currency?.symbol : currency.code) : '₹' }} {{ productDetail?.price }}
+          {{ nuxtApp.$getPercent(productDetail?.original_price, productDetail?.price) }}%
           Off
         </span>
       </div>
@@ -75,7 +89,7 @@
           <span class="">
             white
           </span>
-      
+
         </div>
       </div>
     </div>
@@ -188,6 +202,11 @@
 </template>
 
 <script setup>
+  import {
+    Swiper,
+    SwiperSlide
+  } from 'swiper/vue';
+  import 'swiper/css';
   const textMore = true
   const quantity = ref(0)
   const props = defineProps(['productDetail', 'currency'])

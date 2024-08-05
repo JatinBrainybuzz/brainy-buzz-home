@@ -5,9 +5,6 @@
         <div class="grid grid-cols-1 md:grid-cols-2">
           <div>
             <!-- product details thumb start -->
-            <!-- <product-details-thumb
-                :product="product"
-              /> -->
             <FrontendProductDetailThumb  :productImages="productImages"/>
             <!-- product details thumb end -->
           </div>
@@ -15,7 +12,6 @@
           <div>
             <!-- product details wrapper -->
             <LazyFrontendProductDetailWrapper :productDetail="productDetail" :currency="currency" />
-            <!-- <product-details-wrapper :product="product" /> -->
             <!-- product details wrapper -->
           </div>
         </div>
@@ -26,16 +22,12 @@
         <div class="grid grid-cols-1">
           <div>
             <!-- product details tab nav -->
-            <FrontendProductDetailTabNav />
+            <FrontendProductDetailTabNav :productDetail="productDetail" :attributes="attributes"/>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- video modal start -->
-  <!-- <modal-video/> -->
-  <!-- video modal end -->
 </template>
 
 <script setup>
@@ -44,14 +36,19 @@
   const {
     data: items
   } = useLazyFetch(ProductDetailsAPI);
-  console.log('this is data: ' + items)
+
   const productDetail = computed(() => {
     return items ?.value ?.product;
   });
+
   const currency = computed(() => {
     return items ?.value ?.currency;
   });
+
   const productImages = computed(() => {
     return items ?.value ?.product?.productImages;
+  });
+  const attributes = computed(() => {
+    return items ?.value ?.product?.attributes;
   });
 </script>
