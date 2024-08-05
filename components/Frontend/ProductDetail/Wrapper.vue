@@ -4,22 +4,32 @@
       <span class="hover:text-primary"> Category name </span>
     </div>
     <h3 class=" text-2xl md:text-3xl font-medium leading-4 mb-4">
-      {{ productDetail?.name }}</h3>
-    <div v-if="productDetail?.productType == 'configurable'">
-      <div v-for="(attribute, attributeName) in productDetail?.attributes" :key="attribute.id">
+      {{ productDetails?.name }}</h3>
+    <div v-if="productDetails?.productType == 'configurable'">
+      <div v-for="(attribute, attributeName) in productDetails?.attributes" :key="attribute.id">
         <p class="mt-2">{{ attributeName }}</p>
-        <div class="flex space-x-4">
-          <swiper class="swiper-responsive-breakpoints configurable-card-swiper mb-1">
+        <div class="flex space-x-4">  
+             
+          <div class="my-2" v-for="attributeValue in attribute" :key="attribute.id" >
+            <div class=" w-12 h-10 rounded-sm cursor-pointer border flex justify-center items-center"
+            :id="attributeName.replace(' ', '-') + '-variant-' + attributeValue.value"
+            :class="attributeValue.value == attributeValue.selectedValue ? 'border-success ' + attributeName.replace(' ', '-') + '-attribute' : attributeName.replace(' ', '-') + '-attribute'"
+            @click="filter(attributeName.replace(' ', '-'), productDetails.product_id, attributeValue.value, attributeValue.text)">
+              {{ attributeValue?.text }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <swiper class="swiper-responsive-breakpoints configurable-card-swiper mb-1">
               <swiper-slide v-for="attributeValue in attribute"
-                  :key="attribute.id" class="border mt-50">
+                  :key="attribute.id" class="border flex items-center justify-center mt-50">
                   <div class="w-24 h-12 bg-white border border-gray-300 flex items-center justify-center text-gray-700">
                     {{ attributeValue?.text }}
                   </div>
               </swiper-slide>
-          </swiper>
-        </div>
-      </div>
-    </div>
+          </swiper> -->
 
     <!-- inventory details -->
     <!-- <div class="tp-product-details-inventory flex items-center mb-4">
@@ -107,7 +117,7 @@
       <h3 class=" text-base font-normal mb-3">Quantity</h3>
       <div class="flex mb-2 gap-2">
         <div class=" rounded-none mb-15 relative">
-          <span class=" absolute top-1 leading-6 text-center rounded left-3 cursor-pointer" @click="quantity--">
+          <span class=" absolute top-1 leading-6 text-center rounded left-3 cursor-pointer" @click="quantity >0 ? quantity-- : quantity">
             <Icon name="ic:outline-minus" />
           </span>
           <input
@@ -126,7 +136,7 @@
             Add To Cart</button>
         </div>
       </div>
-      <nuxt-link class=" inline-block text-base font-medium py-2 px-7 bg-primary text-white w-full text-center">
+      <nuxt-link class=" inline-block text-base font-medium py-2 px-7 bg-primary cursor-pointer text-white w-full text-center">
         <!-- :href="`/product-details/${product.id}`" -->
         Buy Now</nuxt-link>
     </div>
@@ -209,7 +219,94 @@
   import 'swiper/css';
   const textMore = true
   const quantity = ref(0)
+  const variantLoading = ref(false)
+  const selectedAttribute = ref()
+
+  const config = useRuntimeConfig();
   const props = defineProps(['productDetail', 'currency'])
+  const productDetails = ref(props.productDetail);
   const nuxtApp = useNuxtApp();
+  
+  const store = useCounterStore();
+
+
+  const filter = (attributeName, productID, event, selectedAttributeName = '') => {
+            variantLoading.value = true
+
+            if (selectedAttributeName) {
+             const attrName = document.querySelector('.' + attributeName + '-attribute-selected-name');
+              if (attrName){
+                element.innerHTML = selectedAttributeName;
+              }
+            }
+            // $(document).find('.' + attributeName + '-attribute').removeClass('border-success');
+            document.querySelectorAll('.' + attributeName + '-attribute').forEach(function(element) {
+              element.classList.remove('border-success');
+            })
+            // $('#' + attributeName + '-variant-' + event).addClass('border-success')
+            console.log(document.getElementById(attributeName + '-variant-' + event))
+           const gg =  document.getElementById(attributeName + '-variant-' + event).classList.add('border-success');
+            var attributeOptions = [];
+            var selectedAttributeIdvalue = [];
+            // $.each($(".border-success"), function () {
+            //     attributeOptions.push($(this).attr('data-attribute-value'));
+            //     selectedAttributeIdvalue.push($(this).attr('id'));
+            // });
+            document.querySelectorAll('.border-success').forEach(function(element) {
+              attributeOptions.push(element.getAttribute('data-attribute-value'));
+              selectedAttributeIdvalue.push(element.id);
+            });
+            const customerData = localStorage.getItem('customerData');
+
+            var data = {
+                'filterData': attributeOptions,
+                'productId': productID,
+                'filterChangeColumnId': event,
+                'selectedAttributeId': selectedAttributeIdvalue,
+                'customerToken': customerData ? JSON.parse(localStorage.getItem('customerData')) : null,
+            }
+            $fetch(config.public.appUrl+"/api/product/change-filter", {
+                method: 'post',
+                body: data
+            })
+            // store.dispatch('app-ecommerce/fetchProductFilterOption', {
+            //     data
+            // })
+                .then(response => {
+                    loading.value = false
+                    if (response.data.type == "success" && response.data != '') {
+                      productDetails.value = response.data.data
+                        // $.each(response.data.data.selectedData, function (key, value) {
+                        //     $('#' + value).addClass('border-success');
+                        // });
+                        response.data.data.selectedData.forEach(function(value) {
+                          var element = document.getElementById(value);
+                          if (element) {
+                            element.classList.add('border-success');
+                          }
+                        })
+
+                    } else if (response.data.productAttribute != '') {
+                      productDetails.value.attributes = response.data.productAttribute
+                        // $.each(response.data.selectedData, function (key, value) {
+                        //     $('#' + value).addClass('border-success');
+                        // });
+                        response.data.selectedData.forEach(function(value) {
+                        var element = document.getElementById(value);
+                        if (element) {
+                          element.classList.add('border-success');
+                        }
+                      });
+                    }
+                })
+        }
+
   // const { $getPercent } = useNuxtApp();
 </script>
+
+<style scoped>
+.border-success{
+  border-width: 2px;
+  border-color: aquamarine;
+}
+</style>
