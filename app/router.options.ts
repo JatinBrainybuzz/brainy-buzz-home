@@ -6,7 +6,7 @@ export default <RouterConfig> {
     {
       name: 'home',
       path: '/',
-      component: () => import('~/pages/index.vue').then(r => r.default || r)
+      component: () => import('~/pages/Index.vue').then(r => r.default || r)
     },
     {
       name: 'cart',
@@ -34,7 +34,7 @@ export default <RouterConfig> {
     {
       name: 'register',
       path: '/register',
-      component: () => import('~/pages/register.vue').then(r => r.default || r),
+      component: () => import('~/pages/Register.vue').then(r => r.default || r),
       meta: {
         layout: false
       },
