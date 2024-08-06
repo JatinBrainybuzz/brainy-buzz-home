@@ -10,7 +10,7 @@
     </NuxtLayout>
     <!-- <UNotifications /> -->
     <div v-for="notification in $notifications" :key="notification.id">
-      <Notification :message="notification.message" :position="notification.position" :duration="notification.duration" />
+      <Notification :message="notification.message" :position="notification.position" :duration="notification.duration"  :variant="notification.variant"/>
     </div>
   </div>
 </template>
@@ -21,10 +21,10 @@ import Notification from '~/components/Notification.vue';
 const { $notifications } = useNuxtApp();
 
 const {data: color} = await useLazyFetch('/api/color');
-const colorData = color.value;
+const colorData = color?.value;
 const appConfig = useAppConfig();
 onServerPrefetch(async () => {
-    appConfig.ui.primary = colorData.value;
+    appConfig.ui.primary = colorData?.value;
 })
 onMounted(() =>{
      appConfig.ui.primary = colorData.value;

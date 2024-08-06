@@ -31,8 +31,6 @@
         </header>
         <!-- Bottom Header -->
         <FrontendHeaderBottom :category="items" />
-        
-    
     </div>
 </template>
 
