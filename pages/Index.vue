@@ -13,6 +13,7 @@
 
 <script setup>
 const config = useRuntimeConfig();
+console.log(config.public);
 const HOMEPAGE_API = config.public.appUrl+"/api/home/get-all-homepage-data?order_id=9&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&domain=localhost&url=localhost&activity=visited_website";
 const {  data: items } = await useLazyFetch(HOMEPAGE_API);
 
