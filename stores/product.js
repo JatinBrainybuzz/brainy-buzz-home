@@ -1,7 +1,10 @@
 
 export const useProductStore = defineStore('product', () =>{
     const selectedProduct = ref('')
-    return {selectedProduct};
+    const selectedAttribute = ref('')
+    
+
+    return {selectedProduct, selectedAttribute};
 })
 
 if (import.meta.hot) {

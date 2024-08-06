@@ -1,11 +1,14 @@
 <template>
+  <div>
+    <FrontendProductDetailBreadcrumb :title="productDetail.name"  :category="productDetail.category"/>
   <section class="tp-product-details-area">
+    
     <div class="tp-product-details-top pb-8">
       <div class="container">
         <div class="grid grid-cols-1 md:grid-cols-2">
           <div>
             <!-- product details thumb start -->
-            <FrontendProductDetailThumb  :productImages="productImages"/>
+            <LazyFrontendProductDetailThumb  :productImages="productImages"/>
             <!-- product details thumb end -->
           </div>
           <!-- col end -->
@@ -28,11 +31,13 @@
       </div>
     </div>
   </section>
+  </div>
 </template>
 
 <script setup>
   const config = useRuntimeConfig();
-  const ProductDetailsAPI = config.public.appUrl+"/api/product/get-product-details?slug="+window.location.pathname.split("/").pop()+"&activity=clicked_products";
+  const router = useRoute();
+  const ProductDetailsAPI = config.public.appUrl+"/api/product/get-product-details?slug="+router.path.split("/").pop()+"&activity=clicked_products";
   const {
     data: items
   } = useLazyFetch(ProductDetailsAPI);

@@ -28,11 +28,16 @@
 
 <script setup>
  const items = defineProps({
-    category: Array
+    category: Array,
+    default: () => []
   })
 
-    console.log(items);
-  const limitedItems = items.category.slice(0, 6);
+  
+  const limitedItems = computed(()=>{
+    return items?.category?.slice(0, 6);
+  }) 
+  
+  // console.log(limitedItems);
 </script>
 
 <style scoped>

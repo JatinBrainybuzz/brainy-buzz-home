@@ -13,5 +13,5 @@ export default defineNuxtConfig({
     public: {
       appUrl: process.env.APP_URL ?? "http://localhost:8000"
     }
-  },  
+  },
 })
