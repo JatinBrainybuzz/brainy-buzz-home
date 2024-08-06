@@ -1,17 +1,18 @@
 <template>
   <div class=" ml-5 sticky top-[120px]">
     <div class="tp-product-details-category text-base mb-2 leading-4">
-      <span class="hover:text-primary"> Category name </span>
+      <span class="hover:text-primary"> <NuxtLink :to="`/product-category/${category}`"> {{ categoryName }} </NuxtLink></span>
     </div>
     <h3 class=" text-2xl md:text-3xl font-medium leading-4 mb-4">
       {{ productDetails?.name }}</h3>
-    <div v-if="productDetails?.productType == 'configurable'">
+    
+      <div v-if="productDetails?.productType == 'configurable'">
       <div v-for="(attribute, attributeName) in productDetails?.attributes" :key="attribute.id">
         <p class="mt-2">{{ attributeName }}</p>
-        <div class="flex space-x-4">  
+        <div class="flex space-x-4">
              
           <div class="my-2" v-for="attributeValue in attribute" :key="attribute.id" >
-            <div class=" w-12 h-10 rounded-sm cursor-pointer border flex justify-center items-center"
+            <div class=" w-12 h-10 rounded-sm cursor-pointer border flex justify-center items-center" :data-attribute-value="attributeValue.value"
             :id="attributeName.replace(' ', '-') + '-variant-' + attributeValue.value"
             :class="attributeValue.value == attributeValue.selectedValue ? 'border-success ' + attributeName.replace(' ', '-') + '-attribute' : attributeName.replace(' ', '-') + '-attribute'"
             @click="filter(attributeName.replace(' ', '-'), productDetails.product_id, attributeValue.value, attributeValue.text)">
@@ -218,7 +219,6 @@
   } from 'swiper/vue';
   import 'swiper/css';
   const textMore = true
-  const quantity = ref(0)
   const variantLoading = ref(false)
   const selectedAttribute = ref()
 
@@ -227,8 +227,13 @@
   const productDetails = ref(props.productDetail);
   const nuxtApp = useNuxtApp();
   
-  const store = useCounterStore();
+  const store = useQuantityStore();
+  const {quantity} = storeToRefs(store);
 
+  const router = useRoute();
+  const pathsegments = router.path.split("/");
+  const categoryName = pathsegments[pathsegments.length - 2].toUpperCase();
+  const category = pathsegments[pathsegments.length - 2];
 
   const filter = (attributeName, productID, event, selectedAttributeName = '') => {
             variantLoading.value = true
@@ -244,8 +249,7 @@
               element.classList.remove('border-success');
             })
             // $('#' + attributeName + '-variant-' + event).addClass('border-success')
-            console.log(document.getElementById(attributeName + '-variant-' + event))
-           const gg =  document.getElementById(attributeName + '-variant-' + event).classList.add('border-success');
+            document.getElementById(attributeName + '-variant-' + event).classList.add('border-success');
             var attributeOptions = [];
             var selectedAttributeIdvalue = [];
             // $.each($(".border-success"), function () {
@@ -258,7 +262,7 @@
             });
             const customerData = localStorage.getItem('customerData');
 
-            var data = {
+            var newData = {
                 'filterData': attributeOptions,
                 'productId': productID,
                 'filterChangeColumnId': event,
@@ -267,13 +271,9 @@
             }
             $fetch(config.public.appUrl+"/api/product/change-filter", {
                 method: 'post',
-                body: data
+                body: {data: newData}
             })
-            // store.dispatch('app-ecommerce/fetchProductFilterOption', {
-            //     data
-            // })
                 .then(response => {
-                    loading.value = false
                     if (response.data.type == "success" && response.data != '') {
                       productDetails.value = response.data.data
                         // $.each(response.data.data.selectedData, function (key, value) {
@@ -297,6 +297,9 @@
                           element.classList.add('border-success');
                         }
                       });
+                    }
+                    else {
+                      return console.log(response.data.type)
                     }
                 })
         }
