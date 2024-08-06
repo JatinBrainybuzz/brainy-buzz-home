@@ -1,0 +1,16 @@
+# RewriteEngine On enables the runtime rewriting engine
+RewriteEngine On
+
+# Check if the requested resource exists, if it does not, then forward the request to index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewriting all other requests to index.html
+RewriteRule ^ index.html [QSA,L]
+
+
+
+# Redirect traffic to your port 3000
+RewriteEngine On
+RewriteBase /
+RewriteRule ^(.*)?$ http://localhost:3000/$1 [P,L]
