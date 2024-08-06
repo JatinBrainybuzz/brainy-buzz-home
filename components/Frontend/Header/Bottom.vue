@@ -21,7 +21,9 @@
                     <div class="tp-header-contact flex items-center justify-end text-primary">
                     <div class="tp-header-contact-icon mr-4">
                         <span>
-                            <Icon size="1.5rem" name="material-symbols:phone-in-talk-watchface-indicator-sharp" />
+                            <ClientOnly>
+                                <Icon size="1.5rem" name="material-symbols:phone-in-talk-watchface-indicator-sharp" />
+                            </ClientOnly>
                         </span>
                     </div>
                     <div class="tp-header-contact-content text-base font-medium mb-2 leading-none">

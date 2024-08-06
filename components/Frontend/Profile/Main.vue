@@ -44,7 +44,9 @@
                      <div class="relative mb-4">
                        <span class="relative inline-block w-14 h-14 leading-[60px] text-center">
                            <span class="profile-count profile-order">5</span>
-                           <Icon name="lucide:boxes" size="60px" />
+                           <ClientOnly>
+                             <Icon name="lucide:boxes" size="60px" />
+                           </ClientOnly>
                        </span>
                      </div>
                      <h4 class="profile__main-info-title">Orders</h4>
@@ -53,10 +55,12 @@
                <div class="col-md-3 col-sm-6">
                  <div class="profile__main-info-item lg:p-[22px 0 20px] border border-solid border-gray-200 text-center pl-[27px] py-[30px] pr-[25px] md:mb-6">
                      <div class="relative mb-4">
-                       <span class="relative inline-block w-14 h-14 leading-[60px] text-center">
+                       <div class="relative inline-block w-14 h-14 leading-[60px] text-center">
                            <span class="profile-count profile-wishlist">10</span>
-                           <Icon name="solar:heart-angle-outline" size="60px" />
-                       </span>
+                           <ClientOnly>
+                             <Icon name="solar:heart-angle-outline" size="60px" />
+                           </ClientOnly>
+                       </div>
                      </div>
                      <h4 class="profile__main-info-title">Wishlist</h4>
                  </div>
@@ -66,7 +70,9 @@
                      <div class="relative mb-4">
                        <span class="relative inline-block w-14 h-14 leading-[60px] text-center ">
                            <span class="profile-count profile-wishlist">07</span>
-                           <Icon name="mdi:gift-open-outline" size="60px" />
+                           <ClientOnly>
+                             <Icon name="mdi:gift-open-outline" size="60px" />
+                           </ClientOnly>
                        </span>
                      </div>
                      <h4 class="profile__main-info-title ">Gift Box</h4>
