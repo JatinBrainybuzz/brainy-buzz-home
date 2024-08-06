@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FrontendProductDetailBreadcrumb :title="productDetail.name"  :category="productDetail.category"/>
+    <FrontendProductDetailBreadcrumb :title="details?.name"  :category="details?.category"/>
   <section class="tp-product-details-area">
     
     <div class="tp-product-details-top pb-8">
@@ -14,7 +14,7 @@
           <!-- col end -->
           <div>
             <!-- product details wrapper -->
-            <LazyFrontendProductDetailWrapper :productDetail="productDetail" :currency="currency" />
+            <LazyFrontendProductDetailWrapper :productDetail="details" @filterData="changeFilter" :currency="currency" />
             <!-- product details wrapper -->
           </div>
         </div>
@@ -42,9 +42,14 @@
     data: items
   } = useLazyFetch(ProductDetailsAPI);
 
+  const details = ref({})
+
   const productDetail = computed(() => {
     return items ?.value ?.product;
   });
+
+  details.value = productDetail;
+  
 
   const currency = computed(() => {
     return items ?.value ?.currency;
@@ -56,4 +61,40 @@
   const attributes = computed(() => {
     return items ?.value ?.product?.attributes;
   });
+
+ 
+
+  async function changeFilter(newData) {
+    try {
+      const response = await $fetch(config.public.appUrl + "/api/product/change-filter", {
+        method: 'post',
+        body: { data: newData }
+      });
+      console.log(response.type);
+      if ( response.type === "success") {
+        details.value = response.data;
+        response.data.selectedData.forEach(function(value) {
+          var element = document.getElementById(value);
+          if (element) {
+            element.classList.add('border-success');
+          }
+        });
+      } else if (response.data && response.data.productAttribute) {
+        productDetails.value.attributes = response.data.productAttribute;
+        response.data.selectedData.forEach(function(value) {
+          var element = document.getElementById(value);
+          if (element) {
+            element.classList.add('border-success');
+          }
+        });
+      } else {
+        console.log('this is else tag', response);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+
+
 </script>

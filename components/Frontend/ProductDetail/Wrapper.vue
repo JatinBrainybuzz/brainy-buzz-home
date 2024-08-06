@@ -56,10 +56,12 @@
       </div>
     </div> -->
     <p class="text-left mt-2">
-      <div v-html="productDetail?.description">
-      </div>
-      <span @click="textMore = !textMore">
-      </span>
+      <ClientOnly>
+        <div v-html="productDetail?.description">
+        </div>
+        <span @click="textMore = !textMore">
+        </span>
+      </ClientOnly>
     </p>
 
     <!-- price -->
@@ -224,12 +226,14 @@
 
   const config = useRuntimeConfig();
   const props = defineProps(['productDetail', 'currency'])
-  const productDetails = ref(props.productDetail);
+  const productDetails = ref(props?.productDetail);
   const nuxtApp = useNuxtApp();
   
+  console.log('this is props: ', productDetails);
   const store = useQuantityStore();
   const {quantity} = storeToRefs(store);
 
+  const emit = defineEmits(['filterData']);
   const router = useRoute();
   const pathsegments = router.path.split("/");
   const categoryName = pathsegments[pathsegments.length - 2].toUpperCase();
@@ -269,39 +273,8 @@
                 'selectedAttributeId': selectedAttributeIdvalue,
                 'customerToken': customerData ? JSON.parse(localStorage.getItem('customerData')) : null,
             }
-            $fetch(config.public.appUrl+"/api/product/change-filter", {
-                method: 'post',
-                body: {data: newData}
-            })
-                .then(response => {
-                    if (response.data.type == "success" && response.data != '') {
-                      productDetails.value = response.data.data
-                        // $.each(response.data.data.selectedData, function (key, value) {
-                        //     $('#' + value).addClass('border-success');
-                        // });
-                        response.data.data.selectedData.forEach(function(value) {
-                          var element = document.getElementById(value);
-                          if (element) {
-                            element.classList.add('border-success');
-                          }
-                        })
-
-                    } else if (response.data.productAttribute != '') {
-                      productDetails.value.attributes = response.data.productAttribute
-                        // $.each(response.data.selectedData, function (key, value) {
-                        //     $('#' + value).addClass('border-success');
-                        // });
-                        response.data.selectedData.forEach(function(value) {
-                        var element = document.getElementById(value);
-                        if (element) {
-                          element.classList.add('border-success');
-                        }
-                      });
-                    }
-                    else {
-                      return console.log(response.data.type)
-                    }
-                })
+            console.log('child data : ', newData);
+            emit('filterData', newData);
         }
 
   // const { $getPercent } = useNuxtApp();
