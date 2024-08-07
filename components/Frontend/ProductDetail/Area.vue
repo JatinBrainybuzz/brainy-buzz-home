@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FrontendProductDetailBreadcrumb :title="details?.name"  :category="details?.category"/>
+    <LazyFrontendProductDetailBreadcrumb :title="productStore.items?.name"  :category="productStore.items?.category"/>
   <section class="tp-product-details-area">
     
     <div class="tp-product-details-top pb-8">
@@ -8,13 +8,13 @@
         <div class="grid grid-cols-1 md:grid-cols-2">
           <div>
             <!-- product details thumb start -->
-            <LazyFrontendProductDetailThumb  :productImages="productImages"/>
+            <LazyFrontendProductDetailThumb  :productImages="productStore.items?.product.productImages"/>
             <!-- product details thumb end -->
           </div>
           <!-- col end -->
           <div>
             <!-- product details wrapper -->
-            <LazyFrontendProductDetailWrapper :productDetail="details" @filterData="changeFilter" :currency="currency" />
+            <LazyFrontendProductDetailWrapper :productDetail="productStore.items?.product" @filterData="changeFilter" :currency="productStore?.currency" />
             <!-- product details wrapper -->
           </div>
         </div>
@@ -25,7 +25,7 @@
         <div class="grid grid-cols-1">
           <div>
             <!-- product details tab nav -->
-            <FrontendProductDetailTabNav :productDetail="productDetail" :attributes="attributes"/>
+            <FrontendProductDetailTabNav :productDetail="productStore.items" :attributes="productStore.attributes"/>
           </div>
         </div>
       </div>
@@ -35,34 +35,66 @@
 </template>
 
 <script setup>
-  const config = useRuntimeConfig();
-  const router = useRoute();
-  const ProductDetailsAPI = config.public.appUrl+"/api/product/get-product-details?slug="+router.path.split("/").pop()+"&activity=clicked_products";
-  const {
-    data: items
-  } = useLazyFetch(ProductDetailsAPI);
+  const config = useRuntimeConfig()
+  const productStore = useProductStore();
 
-  const details = ref({})
+  // onMounted(() => {
+    
+  // });
+  productStore.fetchProductDetails();
 
-  const productDetail = computed(() => {
-    return items ?.value ?.product;
-  });
+  console.log(productStore.items)
 
-  details.value = productDetail;
+  // const productDetail = computed(() => {
+  //   return items ?.value ?.product;
+  // });
+
+  // details.value = productDetail;
   
 
-  const currency = computed(() => {
-    return items ?.value ?.currency;
-  });
+  // const currency = computed(() => {
+  //   return items ?.value ?.currency;
+  // });
 
-  const productImages = computed(() => {
-    return items ?.value ?.product?.productImages;
-  });
-  const attributes = computed(() => {
-    return items ?.value ?.product?.attributes;
-  });
+  // const productImages = computed(() => {
+  //   return items ?.value ?.product?.productImages;
+  // });
+  // const attributes = computed(() => {
+  //   return items ?.value ?.product?.attributes;
+  // });
 
  
+
+  // async function changeFilter(newData) {
+  //   try {
+  //     const response = await $fetch(config.public.appUrl + "/api/product/change-filter", {
+  //       method: 'post',
+  //       body: { data: newData }
+  //     });
+  //     console.log(response.type);
+  //     if ( response.type === "success") {
+  //       details.value = response.data;
+  //       response.data.selectedData.forEach(function(value) {
+  //         var element = document.getElementById(value);
+  //         if (element) {
+  //           element.classList.add('border-success');
+  //         }
+  //       });
+  //     } else if (response.data && response.data.productAttribute) {
+  //       productDetails.value.attributes = response.data.productAttribute;
+  //       response.data.selectedData.forEach(function(value) {
+  //         var element = document.getElementById(value);
+  //         if (element) {
+  //           element.classList.add('border-success');
+  //         }
+  //       });
+  //     } else {
+  //       console.log('this is else tag', response);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // }
 
   async function changeFilter(newData) {
     try {
@@ -70,31 +102,10 @@
         method: 'post',
         body: { data: newData }
       });
-      console.log(response.type);
-      if ( response.type === "success") {
-        details.value = response.data;
-        response.data.selectedData.forEach(function(value) {
-          var element = document.getElementById(value);
-          if (element) {
-            element.classList.add('border-success');
-          }
-        });
-      } else if (response.data && response.data.productAttribute) {
-        productDetails.value.attributes = response.data.productAttribute;
-        response.data.selectedData.forEach(function(value) {
-          var element = document.getElementById(value);
-          if (element) {
-            element.classList.add('border-success');
-          }
-        });
-      } else {
-        console.log('this is else tag', response);
-      }
+      productStore.updateProductDetails(response.data);
     } catch (error) {
-      console.error('Error:', error);
+      console.error(error);
     }
   }
-
-
 
 </script>

@@ -56,12 +56,12 @@
       </div>
     </div> -->
     <p class="text-left mt-2">
-      <ClientOnly>
-        <div v-html="productDetail?.description">
+      <!-- <ClientOnly>
+        <div v-html="sanitizedDescription">
         </div>
         <span @click="textMore = !textMore">
         </span>
-      </ClientOnly>
+      </ClientOnly> -->
     </p>
 
     <!-- price -->
@@ -224,9 +224,9 @@
   const variantLoading = ref(false)
   const selectedAttribute = ref()
 
-  const config = useRuntimeConfig();
+  // const config = useRuntimeConfig();
   const props = defineProps(['productDetail', 'currency'])
-  const productDetails = ref(props?.productDetail);
+  const productDetails = props.productDetail;
   const nuxtApp = useNuxtApp();
   
   console.log('this is props: ', productDetails);
@@ -239,6 +239,10 @@
   const categoryName = pathsegments[pathsegments.length - 2].toUpperCase();
   const category = pathsegments[pathsegments.length - 2];
 
+
+  // const sanitizedDescription = computed(() => {
+  //     return DOMPurify.sanitize(productDetails.value.description);
+  //   });
   const filter = (attributeName, productID, event, selectedAttributeName = '') => {
             variantLoading.value = true
 
@@ -277,7 +281,7 @@
             emit('filterData', newData);
         }
 
-  // const { $getPercent } = useNuxtApp();
+  const { $getPercent } = useNuxtApp();
 </script>
 
 <style scoped>
