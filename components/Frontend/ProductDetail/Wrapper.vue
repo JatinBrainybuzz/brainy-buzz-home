@@ -4,10 +4,10 @@
       <span class="hover:text-primary"> <NuxtLink :to="`/product-category/${category}`"> {{ categoryName }} </NuxtLink></span>
     </div>
     <h3 class=" text-2xl md:text-3xl font-medium leading-4 mb-4">
-      {{ productDetails?.name }}</h3>
+      {{ productDetail?.name }}</h3>
     
-      <div v-if="productDetails?.productType == 'configurable'">
-      <div v-for="(attribute, attributeName) in productDetails?.attributes" :key="attribute.id">
+      <div v-if="productDetail?.productType == 'configurable'">
+      <div v-for="(attribute, attributeName) in productDetail?.attributes" :key="attribute.id">
         <p class="mt-2">{{ attributeName }}</p>
         <div class="flex space-x-4">
              
@@ -15,7 +15,7 @@
             <div class=" w-12 h-10 rounded-sm cursor-pointer border flex justify-center items-center" :data-attribute-value="attributeValue.value"
             :id="attributeName.replace(' ', '-') + '-variant-' + attributeValue.value"
             :class="attributeValue.value == attributeValue.selectedValue ? 'border-success ' + attributeName.replace(' ', '-') + '-attribute' : attributeName.replace(' ', '-') + '-attribute'"
-            @click="filter(attributeName.replace(' ', '-'), productDetails.product_id, attributeValue.value, attributeValue.text)">
+            @click="filter(attributeName.replace(' ', '-'), productDetail.product_id, attributeValue.value, attributeValue.text)">
               {{ attributeValue?.text }}
             </div>
           </div>
@@ -56,18 +56,17 @@
       </div>
     </div> -->
     <p class="text-left mt-2">
-      <!-- <ClientOnly>
-        <div v-html="sanitizedDescription">
+      <ClientOnly>
+        <div v-html="description">
         </div>
         <span @click="textMore = !textMore">
         </span>
-      </ClientOnly> -->
+      </ClientOnly>
     </p>
 
     <!-- price -->
     <div class="tp-product-details-price-wrapper mb-5">
       <div class=" font-medium text-2xl tracking-tight">
-        <!-- v-if="product.discount > 0" -->
         <span class=" font-normal text-base line-through text-gray-600 old-price"
           v-if="productDetail?.original_price">{{ currency ? (currency?.symbol ? currency?.symbol : currency.code) : '₹' }}
           {{ productDetail?.original_price }}
@@ -120,22 +119,22 @@
       <h3 class=" text-base font-normal mb-3">Quantity</h3>
       <div class="flex mb-2 gap-2">
         <div class=" rounded-none mb-15 relative">
-          <span class=" absolute top-1 leading-6 text-center rounded left-3 cursor-pointer" @click="quantity >0 ? quantity-- : quantity">
+          <span class=" absolute top-1 leading-6 text-center rounded left-3 cursor-pointer" @click="count >0 ? count-- : count">
             <Icon name="ic:outline-minus" />
           </span>
           <input
             class="leading-12 bg-gray-100 border-none rounded-none text-base text-black h-10 text-center border border-gray-300"
-            type="text" :value="quantity" disabled>
+            type="text" :value="count" disabled>
           <!-- :value="cartStore.orderQuantity" -->
-          <span class=" absolute top-1 leading-6 text-center rounded right-4 cursor-pointer" @click="quantity++">
+          <span class=" absolute top-1 leading-6 text-center rounded right-4 cursor-pointer" @click="count++">
             <!-- @click="cartStore.increment" -->
             <Icon name="material-symbols:add" />
           </span>
         </div>
         <div
           class="mb-15 w-full px-3 relative border hover:bg-primary-600 hover:text-white border-gray-200 text-base py-2 text-black text-center">
-          <button class="tp-product-details-add-to-cart-btn">
-            <!-- @click="cartStore.addCartProduct(product)" -->
+          <button class="tp-product-details-add-to-cart-btn" @click="Cart = count + Cart">
+            <!--  -->
             Add To Cart</button>
         </div>
       </div>
@@ -225,24 +224,20 @@
   const selectedAttribute = ref()
 
   // const config = useRuntimeConfig();
-  const props = defineProps(['productDetail', 'currency'])
-  const productDetails = props.productDetail;
+  const props = defineProps(['productDetail', 'currency', 'description'])
   const nuxtApp = useNuxtApp();
-  
-  console.log('this is props: ', productDetails);
-  const store = useQuantityStore();
-  const {quantity} = storeToRefs(store);
+  const count = ref(0)
+  const cartStore = useCartStore();
+  const {Cart} = storeToRefs(cartStore);
 
   const emit = defineEmits(['filterData']);
   const router = useRoute();
+
   const pathsegments = router.path.split("/");
   const categoryName = pathsegments[pathsegments.length - 2].toUpperCase();
   const category = pathsegments[pathsegments.length - 2];
 
 
-  // const sanitizedDescription = computed(() => {
-  //     return DOMPurify.sanitize(productDetails.value.description);
-  //   });
   const filter = (attributeName, productID, event, selectedAttributeName = '') => {
             variantLoading.value = true
 
@@ -277,7 +272,6 @@
                 'selectedAttributeId': selectedAttributeIdvalue,
                 'customerToken': customerData ? JSON.parse(localStorage.getItem('customerData')) : null,
             }
-            console.log('child data : ', newData);
             emit('filterData', newData);
         }
 

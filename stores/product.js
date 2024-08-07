@@ -1,34 +1,44 @@
 
-import { useRuntimeConfig, useRoute, useLazyFetch } from "#app";
+import { useRuntimeConfig } from "#app";
 import { ref } from "vue";
 
 export const useProductStore = defineStore('product', () =>{
 
-    const items = ref(null);
+    const config = useRuntimeConfig();
+    // const items = ref(null);
+    const product = ref(null);
     const currency = ref(null);
     const attributes = ref(null);
     const description = ref(null);
     
-    async function fetchProductDetails() {
-        const config = useRuntimeConfig();
-        const router = useRoute();
-        const ProductDetailsAPI = config.public.appUrl+"/api/product/get-product-details?slug="+router.path.split("/").pop()+"&activity=clicked_products";    
-        const { data } = await $fetch(ProductDetailsAPI);
-        
-        items.value = data.value;
-        currency.value = data.value.currency;
-        attributes.value = data.value.product.attributes;
-        description.value = data.value.product.description
+    async function fetchProductDetails(slug) {
+        try {
+        const ProductDetailsAPI = config.public.appUrl+"/api/product/get-product-details?slug="+slug+"&activity=clicked_products";    
+        const data = await $fetch(ProductDetailsAPI);
+        // items.value = data;
+        product.value = data.product;
+        currency.value = data.currency;
+        attributes.value = data.product.attributes;
+        description.value = data.product.description
       }
+      catch (error) {
+        console.error('Error fetching product details:', error);
+      }
+    }
 
       function updateProductDetails(newData) {
-        items.value = newData.items;
-        currency.value = newData.currency;
+        product.value = newData;
         attributes.value = newData.attributes;
+        description.value = newData.description;
       }
 
+    // const getItems = computed(() => items.value);
+    const getProduct = computed(() => product.value);
+    const getAttributes = computed(() => attributes.value);
+    const getDescription = computed(() => description.value);
 
-    return { items, currency, attributes, description, fetchProductDetails, updateProductDetails };
+
+    return { currency, attributes, description,getProduct, getAttributes ,getDescription ,  fetchProductDetails, updateProductDetails };
 })
 
 if (import.meta.hot) {

@@ -13,7 +13,7 @@
                       <span class="font-normal text-base relative pr-3 mr-1">
                         <NuxtLink :to="{name: 'home'}">Home</NuxtLink>
                       </span>   
-                      <span v-if="Category" class="font-normal text-base relative pr-3 mr-1"><NuxtLink> {{ Category }}    </NuxtLink></span>
+                      <span v-if="Category" class="font-normal text-base relative pr-3 mr-1"><NuxtLink :to="`/product-category/${Category}`"> {{ Category }}    </NuxtLink></span>
                       <span v-if="subcategory" class="font-normal text-base relative pr-3 mr-1"><NuxtLink to="#"> {{ subcategory }} </NuxtLink></span>
                       <span class="font-normal text-base relative"><NuxtLink :to="router.fullPath" >{{title}}</NuxtLink></span>
                   </div>
@@ -26,5 +26,6 @@
   
   <script setup >
    const props = defineProps(['Category', 'title', 'subcategory'])
+  
    const router = useRoute()
   </script>  
