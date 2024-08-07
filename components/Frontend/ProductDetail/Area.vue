@@ -41,35 +41,40 @@
 <script setup>
   const config = useRuntimeConfig()
   const productStore = useProductStore();
-  const router = useRoute();
+  const route = useRoute();
   const nuxtApp = useNuxtApp();
   const loading = ref(true);
-  const slug = router.params.slug;
+  const slug = route.params.slug
+  
 
-    onMounted(async () => {
-      if (slug) {
-          try {
-            loading.value = true;
-            await productStore.fetchProductDetails(slug);
-          } catch (error) {
-            console.error('Error fetching product details:', error);
-          } finally {
-            loading.value = false;
-          }
-          } else {
-            console.error('Slug not found in route parameters');
-            loading.value = false;
-        }
+  onMounted(() => {
+    console.log('this is onmoutned', route.params.slug)
+      fetchProductDetails(route.params.slug);
     });
 
-  // async function fetchProductDetails(slug) {
-  //     console.log('this is route:', slug);
-  //     await productStore.fetchProductDetails(slug);
-  //     loading.value = false;
-  //   }
+    const fetchProductDetails = async (slug) => {
+      if (slug) {
+        try {
+          loading.value = true;
+          const daydata = await productStore.fetchProductDetails(slug);
+          if(daydata){
+            loading.value = false;
+          }
+        } catch (error) {
+          loading.value = false;
+          console.error('Error fetching product details:', error);
+        } finally {
+          loading.value = false;
+        }
+      } else {
+        console.error('Slug not found in route parameters');
+        loading.value = false;
+      }
+    }; 
 
   async function changeFilter(newData) {
     try {
+      console.log(newData)
       loading.value = true;
       const response = await $fetch(config.public.appUrl + "/api/product/change-filter", {
         method: 'post',
@@ -85,6 +90,7 @@
       }
 
     } catch (error) {
+      loading.value = false
       console.error(error);
     }
   }

@@ -13,6 +13,7 @@ export const useProductStore = defineStore('product', () =>{
     
     async function fetchProductDetails(slug) {
         try {
+        console.log('api slug: ', slug)
         const ProductDetailsAPI = config.public.appUrl+"/api/product/get-product-details?slug="+slug+"&activity=clicked_products";    
         const data = await $fetch(ProductDetailsAPI);
         // items.value = data;
@@ -20,9 +21,11 @@ export const useProductStore = defineStore('product', () =>{
         currency.value = data.currency;
         attributes.value = data.product.attributes;
         description.value = data.product.description
+        return true
       }
       catch (error) {
-        console.error('Error fetching product details:', error);
+          console.error('Error fetching product details:', error);
+        return false
       }
     }
 
