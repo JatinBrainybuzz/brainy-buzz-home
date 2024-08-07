@@ -9,21 +9,31 @@
                 <SearchBar />
                 <div class="flex items-center gap-8">
                     <div class="relative hidden md:block">
-                        <button type="button" class="text-center "> <Icon name="material-symbols:account-circle-full" size="2rem" class="mb-2 hover:drop-shadow-sm"/>
+                        <button type="button" class="text-center ">
+                            <ClientOnly>
+                                <Icon name="material-symbols:account-circle-full" size="2rem" class="mb-2 hover:drop-shadow-sm"/>
+                            </ClientOnly>
                         <NuxtLink :to="{name: 'login'}"><span class="ml-3 font-400 text-2xl hover:drop-shadow-2xl">Login</span></NuxtLink>
                     </button>
                     </div>
                 <div class="relative">
                     <!-- <span class="badge" > 0</span> -->
                     <UBadge size="sm" :ui="{ rounded: 'rounded-full'}"  class="inline-block absolute right-[-13px] top-[-6px] font-bold text-center">0</UBadge>
-                    <NuxtLink :to="{name: 'wishlist'}"><button type="button" class=""> <Icon name="solar:heart-angle-outline" size="2rem"/></button></NuxtLink>
+                    <NuxtLink :to="{name: 'wishlist'}"><button type="button" class=""> 
+                        <ClientOnly>
+                            <Icon name="solar:heart-angle-outline" size="2rem"/>
+                        </ClientOnly>
+                    </button></NuxtLink>
                 </div>
 
                 <div class="relative py-2">
                     <UBadge size="sm" :ui="{ rounded: 'rounded-full' }" class="inline-block absolute right-[-12px] top-[-2px] font-bold text-center">0</UBadge>
                     <NuxtLink :to="{name: 'cart'}" >
                     <button type="button" class=""> 
-                        <Icon name="solar:bag-5-linear" size="2rem"/></button>
+                        <ClientOnly>
+                            <Icon name="solar:bag-5-linear" size="2rem"/>
+                        </ClientOnly>
+                    </button>
                     </NuxtLink>
                 </div>
                 </div>

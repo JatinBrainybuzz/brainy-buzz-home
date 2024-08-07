@@ -2,10 +2,14 @@
     <div class="tp-header-category relative tp-category-menu tp-header-category-toggle">
       <button @click="handleActive" class="category-menu-btn after:content-[' right-28'] tp-category-menu-toggle">
         <span class="mr-2">
-        <Icon name="material-symbols:menu" />
+        <ClientOnly>
+          <Icon name="material-symbols:menu" />
+        </ClientOnly>
       </span>
         All Categories 
-        <Icon name="material-symbols:arrow-drop-down-rounded" class="absolute right-5 top-6"/>
+        <ClientOnly>
+          <Icon name="material-symbols:arrow-drop-down-rounded" class="absolute right-5 top-6"/>
+        </ClientOnly>
       </button>
       <Transition>
         <!-- Navigation bar -->
@@ -21,7 +25,9 @@
                     <span class=" text-black text-2xl hover:text-primary ">
                       {{item.name }}
                     </span>
-                    <Icon v-if="item.haveChildren" name="material-symbols:arrow-right-rounded" class="absolute right-5"/>
+                    <ClientOnly>
+                      <Icon v-if="item.haveChildren" name="material-symbols:arrow-right-rounded" class="absolute right-5"/>
+                    </ClientOnly>
                   </NuxtLink>
 
                 <!-- Sub Categories  -->

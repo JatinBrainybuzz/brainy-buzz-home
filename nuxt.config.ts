@@ -11,7 +11,9 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      appUrl: process.env.APP_URL ?? "http://localhost:8000"
+      appUrl: process.env.APP_URL,
+      domain: 'www.nooribynikita.com',
+      url: 'www.nooribynikita.com'
     }
   },
 })
