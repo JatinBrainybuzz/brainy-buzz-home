@@ -11,7 +11,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      appUrl: process.env.APP_URL,
+      appUrl: 'https://www.nooribynikita.com',
       domain: 'www.nooribynikita.com',
       url: 'www.nooribynikita.com'
     }

@@ -69,7 +69,7 @@
   // import { Grid , Pagination} from "swiper/modules";
   // const modules = [Grid, Pagination]
   const config = useRuntimeConfig()
-    const HOMEPAGE_API = `${config.public.appUrl}/api/home/get-all-homepage-data?q=&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&url=https://demo.brainybuzz.co/&activity=visited_website&domain=demo.brainybuzz.co`;
+    const HOMEPAGE_API = config.public.appUrl+"/api/home/get-all-homepage-data?order_id=9&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&domain="+config.public.domain+"&url="+config.public.url+"&activity=visited_website";
     const {  data: HomeAPI } = await useLazyFetch(HOMEPAGE_API);
     // const new_arrival = toRef(() => HomeAPI.data.product.new_arrival)
     const new_arrival = computed (() => {return HomeAPI?.value?.data?.product?.new_arrival});

@@ -42,7 +42,7 @@
   
   <script setup>
   const config = useRuntimeConfig()
-const HOMEPAGE_API = `${config.public.appUrl}/api/home/get-all-homepage-data?q=&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&url=https://demo.brainybuzz.co/&activity=visited_website&domain=demo.brainybuzz.co`;
+const HOMEPAGE_API = config.public.appUrl+"/api/home/get-all-homepage-data?order_id=9&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&domain="+config.public.domain+"&url="+config.public.url+"&activity=visited_website";
 const {  data: HomeAPI } = await useLazyFetch(HOMEPAGE_API);
 const product = computed (() => {return HomeAPI?.value?.data?.product.trending })
 const category = computed (() => {return HomeAPI?.value?.data?.parent_category })
