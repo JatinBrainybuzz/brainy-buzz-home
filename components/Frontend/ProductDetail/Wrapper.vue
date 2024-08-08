@@ -275,7 +275,9 @@
             })
                 .then(response => {
                     if (response.data.type == "success" && response.data != '') {
+                      console.log('1' + productDetails)
                       productDetails.value = response.data.data
+                      console.log(productDetails)
                         // $.each(response.data.data.selectedData, function (key, value) {
                         //     $('#' + value).addClass('border-success');
                         // });
