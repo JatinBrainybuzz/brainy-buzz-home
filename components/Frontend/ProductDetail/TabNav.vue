@@ -22,16 +22,13 @@
                   <div>
                     <div class="tp-product-details-desc-content pt-25">
                       <span>
-                        headphone
+                        {{productDetail?.category.replace(/-/g, ' ')}}
                       </span>
                       <h3 class=" lg:text-4xl text-3xl md:text-2xl font-medium mb-3">
-                        HeadPhones
+                        {{productDetail?.name}}
                       </h3>
                       <p class=" text-wrap text-start">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati odio quia architecto sed
-                        possimus, a, harum vitae placeat eaque vero natus veritatis minima error omnis quo eum aut
-                        incidunt corporis quis suscipit sunt ut provident consectetur pariatur! Nisi aliquid voluptatem
-                        tenetur. Non autem ipsam quam nobis reiciendis doloribus aut architecto?
+                       <div v-html="description"></div>
                       </p>
                     </div>
                   </div>
@@ -69,23 +66,16 @@
                   <h3 class=" text-xl font-medium mb-3">Customer reviews</h3>
                   <div class=" mb-3 flex items-center">
                     <div class=" text-5xl font-medium text-black mr-2">
-                      <span>4.5</span>
+                      <span>{{productDetail.rating}}</span>
                     </div>
-                    <div class=" mr-1 flex items-center">
+                    <div class=" mr-1 flex items-center" v-for="star in productDetail.rating" :key="star">
                       <span class="text-yellow-400">
-                        <Icon name="material-symbols-light:kid-star-sharp" /></span>
-                      <span class="text-yellow-400">
-                        <Icon name="material-symbols-light:kid-star-sharp" /></span>
-                      <span class="text-yellow-400">
-                        <Icon name="material-symbols-light:kid-star-sharp" /></span>
-                      <span class="text-yellow-400">
-                        <Icon name="material-symbols-light:kid-star-sharp" /></span>
-                      <span class="text-yellow-400">
-                        <Icon name="material-symbols-light:kid-star-sharp" /></span>
-                      <p class="ml-1 text-sm mb-0">(5
-                        <!-- {{product.reviews?.length}} -->
+                        <Icon name="material-symbols-light:kid-star-sharp" />
+                      </span>
+                    </div>
+                    <p class="ml-1 text-sm mb-0">(
+                        {{productDetail.rating}}
                         Reviews)</p>
-                    </div>
                   </div>
                   <div class="tp-product-details-review-rating-list">
                     <!-- rating item -->
@@ -170,5 +160,5 @@
   function handleTabClick(index) {
     activeTab.value = index
   }
-  const props = defineProps(['productDetail', 'attributes'])
+  const props = defineProps(['productDetail', 'attributes', 'description'])
 </script>

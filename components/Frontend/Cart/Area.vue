@@ -88,6 +88,9 @@
   
   <script setup>
 
-  
+  const data = async ()=>{
+    const response = await useLazyFetch(config.public.appUrl + '/api/customer/admin/cart/get')
+  }
+
   </script>
   

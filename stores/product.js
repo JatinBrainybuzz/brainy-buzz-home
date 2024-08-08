@@ -13,7 +13,6 @@ export const useProductStore = defineStore('product', () =>{
     
     async function fetchProductDetails(slug) {
         try {
-        console.log('api slug: ', slug)
         const ProductDetailsAPI = config.public.appUrl+"/api/product/get-product-details?slug="+slug+"&activity=clicked_products";    
         const data = await $fetch(ProductDetailsAPI);
         // items.value = data;

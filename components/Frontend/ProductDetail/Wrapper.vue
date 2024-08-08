@@ -1,9 +1,9 @@
 <template>
   <div class=" ml-5 sticky top-[120px]">
     <div class="tp-product-details-category text-base mb-2 leading-4">
-      <span class="hover:text-primary"> <NuxtLink :to="`/product-category/${category}`"> {{ categoryName }} </NuxtLink></span>
+      <span class="hover:text-primary leading-relaxed"> <NuxtLink :to="`/product-category/${category}`"> {{ categoryName }} </NuxtLink></span>
     </div>
-    <h3 class=" text-2xl md:text-3xl font-medium leading-4 mb-4">
+    <h3 class=" text-2xl md:text-3xl font-medium leading-relaxed mb-4">
       {{ productDetail?.name }}</h3>
     
       <div v-if="productDetail?.productType == 'configurable'">
@@ -12,7 +12,7 @@
         <div class="flex space-x-4">
              
           <div class="my-2" v-for="attributeValue in attribute" :key="attribute.id" >
-            <div class=" w-12 h-10 rounded-sm cursor-pointer border flex justify-center items-center" :data-attribute-value="attributeValue.value"
+            <div class=" min-h-12 px-3 rounded-lg cursor-pointer border flex justify-center items-center" :data-attribute-value="attributeValue.value"
             :id="attributeName.replace(' ', '-') + '-variant-' + attributeValue.value"
             :class="attributeValue.value == attributeValue.selectedValue ? 'border-success ' + attributeName.replace(' ', '-') + '-attribute' : attributeName.replace(' ', '-') + '-attribute'"
             @click="filter(attributeName.replace(' ', '-'), productDetail.product_id, attributeValue.value, attributeValue.text)">
@@ -65,8 +65,8 @@
     </p>
 
     <!-- price -->
-    <div class="tp-product-details-price-wrapper mb-5">
-      <div class=" font-medium text-2xl tracking-tight">
+    <div class="tp-product-details-price-wrapper mb-3">
+      <div class=" font-medium text-2xl tracking-tight mt-3">
         <span class=" font-normal text-base line-through text-gray-600 old-price"
           v-if="productDetail?.original_price">{{ currency ? (currency?.symbol ? currency?.symbol : currency.code) : '₹' }}
           {{ productDetail?.original_price }}
@@ -75,17 +75,18 @@
           v-else>{{ currency ? (currency?.symbol ? currency?.symbol : currency?.code) : '₹' }}
           {{ productDetail?.price }}
         </span>
-        <span class="tp-product-details-price ml-2 text-black new-price">
+        <span class="tp-product-details-price ml-2  new-price">
           {{ currency ? (currency?.symbol ? currency?.symbol : currency.code) : '₹' }} {{ productDetail?.price }}
-          {{ nuxtApp.$getPercent(productDetail?.original_price, productDetail?.price) }}%
-          Off
+          <span class="text-green-500">
+            {{ nuxtApp.$getPercent(productDetail?.original_price, productDetail?.price) }}%
+            Off
+          </span>
         </span>
       </div>
     </div>
 
     <!-- variations -->
-    <div class="tp-product-details-variation mb-7 ">
-      <!-- v-if="hasColorData" -->
+    <!-- <div class="tp-product-details-variation mb-7 ">
       <div class="tp-product-details-variation-item mb-4 flex ">
         <h4 class="tp-product-details-variation-title">Color :</h4>
         <div class="tp-product-details-variation-list ml-3">
@@ -104,7 +105,7 @@
 
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- product countdown start -->
     <div>
@@ -116,7 +117,9 @@
 
     <!-- actions -->
     <div class=" mb-4">
-      <h3 class=" text-base font-normal mb-3">Quantity</h3>
+      <div class="flex gap-8">
+        <h3 class=" text-base font-normal mb-3">Quantity: </h3> <span>{{productDetail?.inventory}}</span>
+      </div>
       <div class="flex mb-2 gap-2">
         <div class=" rounded-none mb-15 relative">
           <span class=" absolute top-1 leading-6 text-center rounded left-3 cursor-pointer" @click="count >0 ? count-- : count">
@@ -126,7 +129,7 @@
             class="leading-12 bg-gray-100 border-none rounded-none text-base text-black h-10 text-center border border-gray-300"
             type="text" :value="count" disabled>
           <!-- :value="cartStore.orderQuantity" -->
-          <span class=" absolute top-1 leading-6 text-center rounded right-4 cursor-pointer" @click="count++">
+          <span class=" absolute top-1 leading-6 text-center rounded right-4 cursor-pointer" @click="count < productDetail.inventory? count++ : count">
             <!-- @click="cartStore.increment" -->
             <Icon name="material-symbols:add" />
           </span>
@@ -171,13 +174,10 @@
         <div class="tp-product-details-query-item flex items-center gap-2">
           <span>Category: </span>
           <p class="text-gray-600">
-            <!-- {{product.parent}}  -->
-            Headphones</p>
+            {{productDetail?.category.replace(/-/g, ' ')}}
+            </p>
         </div>
-        <div class="tp-product-details-query-item flex items-center gap-2">
-          <span>Tag: </span>
-          <p class="text-gray-600">Android</p>
-        </div>
+        
       </div>
       <div class=" mb-5 text-base flex gap-2 items-center">
         <span class=" text-base text-black mr-1">Share: </span>
@@ -229,18 +229,18 @@
   const count = ref(0)
   const cartStore = useCartStore();
   const {Cart} = storeToRefs(cartStore);
-
+  
   const emit = defineEmits(['filterData']);
   const router = useRoute();
 
   const pathsegments = router.path.split("/");
-  const categoryName = pathsegments[pathsegments.length - 2].toUpperCase();
+  const categoryName = pathsegments[pathsegments.length - 2].replace(' ', '-').toUpperCase();
   const category = pathsegments[pathsegments.length - 2];
 
 
-  const filter = (attributeName, productID, event, selectedAttributeName = '') => {
+  const filter = (attributeName, productID, event, selectedAttributeName = '') => { 
             variantLoading.value = true
-
+            console.log('this is something', props.productDetail)
             if (selectedAttributeName) {
              const attrName = document.querySelector('.' + attributeName + '-attribute-selected-name');
               if (attrName){

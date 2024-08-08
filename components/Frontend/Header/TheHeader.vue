@@ -17,8 +17,10 @@
                     </button>
                     </div>
                 <div class="relative">
+                    <div>
+                    </div>
                     <!-- <span class="badge" > 0</span> -->
-                    <UBadge size="sm" :ui="{ rounded: 'rounded-full'}"  class="inline-block absolute right-[-13px] top-[-6px] font-bold text-center">0</UBadge>
+                    <UBadge size="sm" :ui="{ rounded: 'rounded-full'}"  class="inline-block absolute right-[-13px] top-[-6px] font-bold text-center">{{cartStore.Wishlist}}</UBadge>
                     <NuxtLink :to="{name: 'wishlist'}"><button type="button" class=""> 
                         <ClientOnly>
                             <Icon name="solar:heart-angle-outline" size="2rem"/>
@@ -27,7 +29,7 @@
                 </div>
 
                 <div class="relative py-2">
-                    <UBadge size="sm" :ui="{ rounded: 'rounded-full' }" class="inline-block absolute right-[-12px] top-[-2px] font-bold text-center">0</UBadge>
+                    <UBadge size="sm" :ui="{ rounded: 'rounded-full' }" class="inline-block absolute right-[-12px] top-[-2px] font-bold text-center">{{cartStore.Cart}}</UBadge>
                     <NuxtLink :to="{name: 'cart'}" >
                     <button type="button" class=""> 
                         <ClientOnly>
@@ -51,5 +53,7 @@ const {  data: HomeAPI } = await useLazyFetch(HOMEPAGE_API);
 const items = computed(()=>{
     return HomeAPI?.value?.data?.parent_category;
 }) 
+
+const cartStore = useCartStore();
 
 </script>

@@ -1,5 +1,6 @@
 <template>
     <form >
+      <ClientOnly>
       <div
         class=" mb-7 flex items-center"
       >
@@ -62,12 +63,13 @@
           </label>
         </div>
       </div>
-      <div class="">
-        <button type="submit" class=" font-medium text-base text-white py-2 px-11 bg-primary">Submit</button>
+      <div class="mb-1">
+        
+          <button type="submit" class="font-medium text-base text-white py-2 px-11 bg-primary">Submit</button>
       </div>
+    </ClientOnly>
     </form>
   </template>
   
-  <script setup> 
-  
+  <script setup>
   </script>

@@ -28,7 +28,7 @@
           <div class="grid grid-cols-1">
             <div>
               <!-- product details tab nav -->
-              <FrontendProductDetailTabNav :productDetail="productStore.getProduct" :attributes="productStore.getAttributes"/>
+              <FrontendProductDetailTabNav :productDetail="productStore?.getProduct" :description="productStore?.getDescription" :attributes="productStore.getAttributes"/>
             </div>
           </div>
         </div>
@@ -48,7 +48,6 @@
   
 
   onMounted(() => {
-    console.log('this is onmoutned', route.params.slug)
       fetchProductDetails(route.params.slug);
     });
 

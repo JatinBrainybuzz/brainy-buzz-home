@@ -55,13 +55,10 @@
               </ClientOnly>  
             </UTooltip>
             </button>
-            <button
-              type="button"
-              :class="`product-action-btn  tp-product-add-to-wishlist-btn `"
-            >
+            <button type="button" :class="`product-action-btn  tp-product-add-to-wishlist-btn `" @click="">
               <UTooltip text="Add To Wishlist" :popper="{ placement: 'left' }" class="product-tooltip">
                 <ClientOnly>
-                  <Icon name="solar:heart-angle-outline" />
+                  <Icon name="solar:heart-angle-outline"  />
                 </ClientOnly>
             </UTooltip>
             </button>
@@ -155,17 +152,29 @@
   
   <script setup>
   import { useTimer } from "vue-timer-hook";
-  const isItemInCart = ref(false);
-  function addToCart(){
-    isItemInCart == true
-  }
+  
+  const cartStore = useCartStore()
   const props = defineProps({
-  item: Object,
-  // // offer_style: {
-  // //   type: Boolean,
-  //   // default: undefined // To make it optional
-  // }
-});
+    item: Object,
+    // // offer_style: {
+    // //   type: Boolean,
+    //   // default: undefined // To make it optional
+    // }
+  });
+ async function addToCart(productID){
+    try {
+        const result = await cartStore.addCart(productID)
+        const sg = cartStore.getCart.find((item) => item.productId === productID);
+        console.log('this is result:',sg)
+      }
+      catch(error){
+        console.log('something error: ', error)
+      }
+  }
+    
+
+
+
   // let timer;
   // if (props.item.offerDate) {
   //   const endTime = new Date(props.item.offerDate.endDate);
