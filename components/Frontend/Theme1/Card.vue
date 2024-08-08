@@ -161,9 +161,9 @@
     //   // default: undefined // To make it optional
     // }
   });
- async function addToCart(productID){
+  function addToCart(productID){
     try {
-        const result = await cartStore.addCart(productID)
+        cartStore.addCart(productID)
         const sg = cartStore.getCart.find((item) => item.productId === productID);
         console.log('this is result:',sg)
       }

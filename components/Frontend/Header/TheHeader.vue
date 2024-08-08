@@ -20,7 +20,7 @@
                     <div>
                     </div>
                     <!-- <span class="badge" > 0</span> -->
-                    <UBadge size="sm" :ui="{ rounded: 'rounded-full'}"  class="inline-block absolute right-[-13px] top-[-6px] font-bold text-center">{{cartStore.Wishlist}}</UBadge>
+                    <UBadge size="sm" :ui="{ rounded: 'rounded-full'}"  class="inline-block absolute right-[-13px] top-[-6px] font-bold text-center">{{cartStore?.Wishlist}}</UBadge>
                     <NuxtLink :to="{name: 'wishlist'}"><button type="button" class=""> 
                         <ClientOnly>
                             <Icon name="solar:heart-angle-outline" size="2rem"/>
@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="relative py-2">
-                    <UBadge size="sm" :ui="{ rounded: 'rounded-full' }" class="inline-block absolute right-[-12px] top-[-2px] font-bold text-center">{{cartStore.Cart}}</UBadge>
+                    <UBadge size="sm" :ui="{ rounded: 'rounded-full' }" class="inline-block absolute right-[-12px] top-[-2px] font-bold text-center">{{cartStore?.Cart}}</UBadge>
                     <NuxtLink :to="{name: 'cart'}" >
                     <button type="button" class=""> 
                         <ClientOnly>
@@ -40,7 +40,7 @@
                 </div>
                 </div>
         </nav>
-        </header>
+    </header>
         <!-- Bottom Header -->
         <FrontendHeaderBottom :category="items" />
     </div>
@@ -50,6 +50,12 @@
 const config = useRuntimeConfig()
 const HOMEPAGE_API = config.public.appUrl+"/api/home/get-all-homepage-data?order_id=9&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&domain=localhost&url=localhost&activity=visited_website";
 const {  data: HomeAPI } = await useLazyFetch(HOMEPAGE_API);
+// const {data: HomeAPI} = useProductCategories;
+// console.log('this is data', HomeAPI)
+
+const {sayHello} = useHomeApi()
+    
+
 const items = computed(()=>{
     return HomeAPI?.value?.data?.parent_category;
 }) 
