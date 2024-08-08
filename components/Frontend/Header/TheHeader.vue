@@ -47,18 +47,27 @@
 </template>
 
 <script setup>
-const config = useRuntimeConfig()
-const HOMEPAGE_API = config.public.appUrl+"/api/home/get-all-homepage-data?order_id=9&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&domain=localhost&url=localhost&activity=visited_website";
-const {  data: HomeAPI } = await useLazyFetch(HOMEPAGE_API);
-// const {data: HomeAPI} = useProductCategories;
-// console.log('this is data', HomeAPI)
+// const config = useRuntimeConfig()
 
-const {sayHello} = useHomeApi()
-    
+const HomeApiStore = useHomeApiStore();
+const items = ref(null);
+// console.log('items data',items.value)
+onBeforeMount(async () => {
+    const data =  HomeApiStore.data
+    // items.value = data?.value?.data.parent_category;
+    items.value = data?.data.parent_category;
+    console.log('this is header',data)
+    console.log('item value',items.value)
+   
+});
 
-const items = computed(()=>{
-    return HomeAPI?.value?.data?.parent_category;
-}) 
+
+
+    // console.log('Home api :', data.value.data.parent_category);
+     
+
+
+
 
 const cartStore = useCartStore();
 

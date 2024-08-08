@@ -1,5 +1,6 @@
 <template>
     <section>
+      <FrontendLoader v-if="pending" />
         <UCarousel v-slot="{ item }" ref="carouselRef" :items="arr" :ui="{ item: 'basis-full md:basis-1/2 lg:basis-1/2' }" class="rounded-lg overflow-hidden" arrows indicators>
             <img :src="item.media" class="object-fit w-full h-3/4" draggable="false">
         </UCarousel>
@@ -13,12 +14,24 @@
 
 <script setup>
 const config = useRuntimeConfig();
+const HomeApiStore = useHomeApiStore();
 const HOMEPAGE_API = config.public.appUrl+"/api/home/get-all-homepage-data?order_id=9&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&domain=localhost&url=localhost&activity=visited_website";
-const {  data: items } = await useLazyFetch(HOMEPAGE_API);
+const {  data: items, pending } = await useLazyFetch(HOMEPAGE_API);
+const itemsData = items?.value
+
+onServerPrefetch(async () => {
+  HomeApiStore.addHomeData(itemsData);
+})
+
+
+
+
+// const items = ref(null)
 
 const carouselRef = ref()
 
-console.log(HOMEPAGE_API);
+// console.log(HOMEPAGE_API);
+
 
 const parentCategories = computed(() => {
   return items?.value?.data?.parent_category;
@@ -36,6 +49,8 @@ const new_arrival = computed(() => {
 const trending = computed(() => {
   return items?.value?.data?.product?.trending;
 });
+
+
 
 // onMounted(() => {
 //   setInterval(() => {

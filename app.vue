@@ -19,12 +19,11 @@ import { useNuxtApp } from '#app';
 import Notification from '~/components/Notification.vue';
 
 const { $notifications } = useNuxtApp();
-
 const {data: color} = await useLazyFetch('/api/color');
 const colorData = color?.value;
 const appConfig = useAppConfig();
 onServerPrefetch(async () => {
-    appConfig.ui.primary = colorData?.value;
+  appConfig.ui.primary = colorData?.value;
 })
 onMounted(() =>{
      appConfig.ui.primary = colorData.value;
@@ -39,6 +38,4 @@ nuxtApp.hook("page:start", () => {
 nuxtApp.hook("page:finish", () => {
   loading.value = false;
 });
-
-
 </script>
