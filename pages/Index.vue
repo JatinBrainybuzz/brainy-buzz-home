@@ -15,7 +15,14 @@
 const config = useRuntimeConfig();
 console.log(config.public);
 const HOMEPAGE_API = config.public.appUrl+"/api/home/get-all-homepage-data?order_id=9&q&categories=all&sortBy=featured&page=1&perPage=9&priceRange=7400&priceRangeDefined=all&routePath=/product/filter&domain="+config.public.domain+"&url="+config.public.url+"&activity=visited_website";
-const {  data: items } = await useLazyFetch(HOMEPAGE_API);
+
+const { data: items } = await useLazyFetch(HOMEPAGE_API, {
+  mode: 'cors', // Ensure the request is made with CORS mode
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  }
+});
+// const {  data: items } = await useLazyFetch(HOMEPAGE_API);
 
 const carouselRef = ref()
 

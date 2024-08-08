@@ -6,7 +6,7 @@ module.exports = {
       exec_mode: 'cluster',
       instances: 'max',
       script: './.output/server/index.mjs',
-      cwd: '/applications/ncmddvhzen/public_html',
+      cwd: '/home/1078832.cloudwaysapps.com/ncmddvhzen/public_html',
     }
   ]
 }
