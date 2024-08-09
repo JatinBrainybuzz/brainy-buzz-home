@@ -2,7 +2,7 @@
     <div :class="` my-16 mx-5 group bg-white border rounded-lg border-gray-300 hover:shadow-lg hover:border-white hover:border transition-1`">
       <div class="max-w-full border-gray-400 border-b rounded-t-lg md:w-auto relative overflow-hidden ">
         <nuxt-link :to="{ name: 'product-details-id', params: {category: item.category, slug: item.slug } }">
-          <img :src="item.image" alt="Product" class="group-hover:transform group-hover:scale-110 group-hover:transition-1" />
+          <img :src="item.image" alt="Product" class="group-hover:transform group-hover:scale-110 group-hover:transition-1 max-h-[360px] min-h-[200px] object-cover" />
         </nuxt-link>
   
         <!-- product badge -->
@@ -64,9 +64,9 @@
             </button>
             <button type="button" class="product-action-btn  rounded-b-md " >
               <UTooltip text="Book on Whatsapp" :popper="{ placement: 'left' }">
-                
+                <NuxtLink :to="`https://wa.me/${item?.whatsapp_number ? item?.whatsapp_number : '918800737772'}/?text=Please place an order for SKU:`+item?.sku+ ' ' + 'Product URL:' +item?.whatsapp_slug">
                   <Icon name="nimbus:whatsapp" />
-                
+                </NuxtLink>
             </UTooltip>
 
             </button>
@@ -74,12 +74,12 @@
         </div>
       </div>
       <!-- product content -->
-      <div class=" md:px-8 px-8 py-20 md:py-8">
+      <div class=" md:px-4 px-3 pt-8 md:pt-8 text-center">
         <!-- tp-product-category -->
         <div class=" leading-none mb-3 text-left text-opacity-70 text-sm font-medium hover:text-primary">
           <nuxt-link :href="`/product-category/${item.category}`">{{ item.category }}</nuxt-link>
         </div>
-        <div class="h-20">
+        <div class="min-h-8">
           <h3 class="hover:text-primary mb-5 font-medium text-base leading-tight text-left text-clip">
             <nuxt-link :to="{ name: 'product-details-id', params: {category: item.category, slug: item.slug } }">
               {{ item.name }}
@@ -118,7 +118,7 @@
             <span>(4 Review)</span>
           </div>
         </div>
-        <div class="mb-5">
+        <div class="mb-2">
           <div v-if="item.special_price" class=" font-bold text-base tracking-tight text-left">
             <span class=" text-gray-700 text-sm line-through font-medium">Rs {{ item.price }}</span>
             <span class=" text-primary md:text-35">
@@ -127,7 +127,21 @@
           </div>
           <span v-else class="text-black md:text-35">Rs {{ item.price }}</span>
         </div>
-  
+        <div class="px-2 pb-4 flex justify-center items-center">
+          <ClientOnly>
+            <UTooltip text="Book on WhatsApp" :popper="{ placement: 'left'}" >
+              <NuxtLink :to="`https://wa.me/${item?.whatsapp_number ? item?.whatsapp_number : '918800737772'}/?text=Please place an order for SKU:`+item?.sku+ ' ' + 'Product URL:' +item?.whatsapp_slug">
+                <Icon name="uim:whatsapp" size="2.6rem" class="text-primary-500 mr-5 hover:scale-105"/>
+              </NuxtLink>
+            </UTooltip>
+          </ClientOnly>
+          <button v-if="item?.product_inventory > 0" class="btn ml-2 lg:py-[6px] py-1 hover:shadow-lg">
+            Add to Cart
+          </button>
+          <button v-if="item?.product_inventory == 0" class="btn ml-2 lg:py-[6px] py-1 hover:shadow-lg">
+            Notify Me
+          </button>
+        </div>
         <!-- <div class="tp-product-countdown" v-if="offer_style">
           <div class="tp-product-countdown-inner">
             <ul>
@@ -161,11 +175,12 @@
     //   // default: undefined // To make it optional
     // }
   });
+
+
   function addToCart(productID){
     try {
         cartStore.addCart(productID)
-        const sg = cartStore.getCart.find((item) => item.productId === productID);
-        console.log('this is result:',sg)
+         const data = cartStore.getCart.find((item) => item.productId === productID);
       }
       catch(error){
         console.log('something error: ', error)

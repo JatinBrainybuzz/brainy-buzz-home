@@ -56,8 +56,6 @@ onBeforeMount(async () => {
     const data =  HomeApiStore.data
     // items.value = data?.value?.data.parent_category;
     items.value = data?.data.parent_category;
-    console.log('this is header',data)
-    console.log('item value',items.value)
    
 });
 
