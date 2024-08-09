@@ -5,9 +5,11 @@
       <img src="/public/bbLogo.png"  class="rounded-full max-w-28 max-h-28  md:max-w-52 md:max-h-52 xl:max-w-80 xl:max-h-80"> 
   </div>
     <NuxtLoadingIndicator />
-        <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <Suspense>
+      <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
+    </Suspense>
     <!-- <UNotifications /> -->
     <div v-for="notification in $notifications" :key="notification.id">
       <Notification :message="notification.message" :position="notification.position" :duration="notification.duration"  :variant="notification.variant"/>

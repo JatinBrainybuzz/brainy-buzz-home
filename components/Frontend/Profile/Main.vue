@@ -44,9 +44,9 @@
                      <div class="relative mb-4">
                        <span class="relative inline-block w-14 h-14 leading-[60px] text-center">
                            <span class="profile-count profile-order">5</span>
-                           <ClientOnly>
+                           
                              <Icon name="lucide:boxes" size="60px" />
-                           </ClientOnly>
+                           
                        </span>
                      </div>
                      <h4 class="profile__main-info-title">Orders</h4>
@@ -57,9 +57,9 @@
                      <div class="relative mb-4">
                        <div class="relative inline-block w-14 h-14 leading-[60px] text-center">
                            <span class="profile-count profile-wishlist">10</span>
-                           <ClientOnly>
+                           
                              <Icon name="solar:heart-angle-outline" size="60px" />
-                           </ClientOnly>
+                           
                        </div>
                      </div>
                      <h4 class="profile__main-info-title">Wishlist</h4>
@@ -70,9 +70,9 @@
                      <div class="relative mb-4">
                        <span class="relative inline-block w-14 h-14 leading-[60px] text-center ">
                            <span class="profile-count profile-wishlist">07</span>
-                           <ClientOnly>
+                           
                              <Icon name="mdi:gift-open-outline" size="60px" />
-                           </ClientOnly>
+                           
                        </span>
                      </div>
                      <h4 class="profile__main-info-title ">Gift Box</h4>

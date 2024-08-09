@@ -6,9 +6,9 @@
                 <div class="breadcrumb__content relative z-[1]">
                   <div class="breadcrumb__list">
                       <span class="breadcrumb-icon font-normal text-base relative pr-3 mr-1">
-                        <ClientOnly>
+                        
                           <Icon name="material-symbols:home" />
-                        </ClientOnly>
+                        
                       </span>
                       <span class="font-normal text-base relative pr-3 mr-1">
                         <NuxtLink :to="{name: 'home'}">Home</NuxtLink>

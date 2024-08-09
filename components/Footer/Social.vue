@@ -1,9 +1,9 @@
 <template>
   <div class="text-primary">
     <a v-for="item in social_data" :key="item.id" :href="item.link" >
-      <ClientOnly>
+      
         <Icon :name="item.icon" size="2rem" class="mx-3 my-4"/>
-      </ClientOnly>
+      
     </a>
   </div>
   </template>

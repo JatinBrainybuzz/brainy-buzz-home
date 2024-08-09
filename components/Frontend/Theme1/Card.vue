@@ -25,9 +25,9 @@
               } -->
               
               <UTooltip text="Add to Cart" :popper="{ placement: 'left'}" >
-                <ClientOnly>
+                
                   <Icon name="material-symbols:shopping-cart-outline" />
-                </ClientOnly>
+                
             </UTooltip>
               <!-- <span class="tp-product-tooltip">Add to Cart</span> -->
             </button>
@@ -38,9 +38,9 @@
             >
             <!-- ${isItemInCart(item)? 'active': ''} -->
             <UTooltip text="Add to Cart" :popper="{ placement: 'left' }" class="product-tooltip">
-              <ClientOnly>
+              
                 <Icon name="material-symbols:shopping-cart-outline" />
-              </ClientOnly>  
+                
             </UTooltip>
             </nuxt-link>
   
@@ -50,23 +50,23 @@
             > 
            
             <UTooltip text="Quick View" :popper="{ placement: 'left' }" class="product-tooltip">
-              <ClientOnly>
+              
                 <Icon name="ph:eye-bold" />
-              </ClientOnly>  
+                
             </UTooltip>
             </button>
             <button type="button" :class="`product-action-btn  tp-product-add-to-wishlist-btn `" @click="">
               <UTooltip text="Add To Wishlist" :popper="{ placement: 'left' }" class="product-tooltip">
-                <ClientOnly>
+                
                   <Icon name="solar:heart-angle-outline"  />
-                </ClientOnly>
+                
             </UTooltip>
             </button>
             <button type="button" class="product-action-btn  rounded-b-md " >
               <UTooltip text="Book on Whatsapp" :popper="{ placement: 'left' }">
-                <ClientOnly>
+                
                   <Icon name="nimbus:whatsapp" />
-                </ClientOnly>
+                
             </UTooltip>
 
             </button>
@@ -89,29 +89,29 @@
         <div class=" leading-none mb-3 md:mb-7 flex items-center">
           <div class="tp-product-rating-icon  text-yellow-800 mr-2 flex items-center">
             <span>
-              <ClientOnly>
+              
                 <Icon name="material-symbols:kid-star" size="1.1rem" color="yellow" />
-              </ClientOnly>
+              
             </span>
             <span>
-              <ClientOnly>
+              
                 <Icon name="material-symbols:kid-star" size="1.1rem" color="yellow" />
-              </ClientOnly>
+              
             </span>
             <span>
-              <ClientOnly>
+              
                 <Icon name="material-symbols:kid-star" size="1.1rem" color="yellow" />
-              </ClientOnly>
+              
             </span>
             <span>
-              <ClientOnly>
+              
                 <Icon name="material-symbols:kid-star" size="1.1rem" color="yellow" />
-              </ClientOnly>
+              
             </span>
             <span>
-              <ClientOnly>
+              
                 <Icon name="uis:star-half-alt" size="1.2rem" color="yellow" />
-              </ClientOnly>
+              
             </span>
           </div>
           <div class="font-medium text-sm">

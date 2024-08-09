@@ -56,12 +56,12 @@
       </div>
     </div> -->
     <p class="text-left mt-2">
-      <ClientOnly>
+      
         <div v-html="description">
         </div>
         <span @click="textMore = !textMore">
         </span>
-      </ClientOnly>
+      
     </p>
 
     <!-- price -->
